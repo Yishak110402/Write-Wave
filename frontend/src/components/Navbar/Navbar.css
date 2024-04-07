@@ -1,0 +1,24 @@
+
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem 6rem;
+    color: #5d4cff;
+    padding-right: 15rem;
+}
+.nav-links{
+    display: flex;
+    gap: 2rem;
+    list-style-type: none;
+}
+.nav-links a{
+    text-decoration: none;
+    color: #5d4cff;
+}
+.navbar .logo a{
+    font-family: cursive;
+    font-size: 0.95rem;
+    text-decoration: none;
+    color: #5d4cff;
+}
