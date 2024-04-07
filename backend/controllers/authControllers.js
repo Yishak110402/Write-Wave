@@ -1,5 +1,6 @@
 const User = require("./../models/userModel");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs")
 
 function signWebToken(id) {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "10d" });
@@ -52,7 +53,9 @@ exports.login = async (req, res) => {
       });
     }
 
-    if (user.password !== password) {
+    const validPassword = await bcrypt.compare(password, user.password)
+
+    if (!validPassword) {
       return res.status(400).json({
         status: "fail",
         message: "Invalid password",

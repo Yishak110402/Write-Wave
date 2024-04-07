@@ -1,7 +1,7 @@
 import LoginForm from "../components/Login/LoginForm";
 
-export default function Login(){
+export default function Login({setActiveUser}){
     return( <>
-        <LoginForm/>
+        <LoginForm setActiveUser={setActiveUser} />
     </>)
 }

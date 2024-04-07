@@ -31,12 +31,17 @@
     border-radius: 20px;
     cursor: pointer;
 }
+.signup form button:disabled{
+    opacity: 0.8;
+    cursor: not-allowed;
+}
 .signup form h1{
     font-family: cursive;
     color: #5d4cff;
 }
 .signup p a{
     color: #5d4cff;
+    text-underline-offset: 0.2rem;
 }
 .success-msg{
     background-color: #8bff97;

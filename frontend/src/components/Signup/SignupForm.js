@@ -8,6 +8,7 @@ export default function SignUpForm() {
   const [showSuccessMsg, setShowSuccessMsg] = useState(false);
   const [showErrorMsg, setShowErrorMsg] = useState(false);
   const [err, setErr] = useState(null)
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
 
   async function handleFormSubmit(e) {
@@ -15,6 +16,7 @@ export default function SignUpForm() {
     setShowSuccessMsg(false);
     setShowErrorMsg(false);
     setErr(null)
+    setLoading(true)
 
     const res = await fetch("http://127.0.0.1:6969/users/signup", {
       method: "POST",
@@ -25,18 +27,22 @@ export default function SignUpForm() {
     });
     if(!res.ok){
       setShowErrorMsg(true)
+      setLoading(false)
     }
     const data = await res.json();
     console.log(data);
     if (data.status === "fail") {
       setShowErrorMsg(true);
       setErr(data.message)
+      setLoading(false)
       return;
     }
     if (data.status === "success") {
       setShowSuccessMsg(true);
+      setLoading(false)
     }
     // navigate('/login')
+    setLoading(false)
   }
   return (
     <div className="signup">
@@ -51,6 +57,7 @@ export default function SignUpForm() {
         )}
 
         <input
+          value={formData.name}
           required
           placeholder="Name"
           onChange={(e) =>
@@ -58,6 +65,7 @@ export default function SignUpForm() {
           }
         />
         <input
+          value={formData.email}
           onChange={(e) => {
             setFormData((form) => ({ ...form, email: e.target.value }));
           }}
@@ -66,6 +74,7 @@ export default function SignUpForm() {
           placeholder="Email"
         />
         <input
+          value={formData.password}
           onChange={(e) => {
             setFormData((form) => ({ ...form, password: e.target.value }));
           }}
@@ -73,7 +82,7 @@ export default function SignUpForm() {
           required
           placeholder="Password"
         />
-        <button type="submit">Sign up</button>
+        <button disabled={loading} type="submit">{!loading?"Sign up":"Loading"}</button>
         <p>
           Already have an account <Link to="/login">log in</Link>
         </p>

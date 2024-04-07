@@ -1,14 +1,20 @@
 import { useState } from "react";
 import blogImage from "./../../assets/undraw_Blog_post_re_fy5x.png";
 import "./LoginForm.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function LoginForm() {
+export default function LoginForm({setActiveUser}) {
   const [formData, setFormData] = useState({});
+  const [showErrorMsg, setShowErrorMsg] = useState(false);
+  const [err, setErr] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
   async function handleFormSubmit(e) {
     e.preventDefault();
-
+    setLoading(true)
+    setShowErrorMsg(false)
+    setErr(null)
     const res = await fetch("http://127.0.0.1:6969/users/login", {
       method: "POST",
       headers: {
@@ -18,12 +24,25 @@ export default function LoginForm() {
     });
     const data = await res.json();
     console.log(data);
+    if(data.status === "fail"){
+      setErr(data.message)
+      setLoading(false)
+      setShowErrorMsg(true)
+      return
+    }
+    setLoading(false)
+    setActiveUser(data.data.user)
+    navigate('/home')
+
   }
   return (
     <div className="login">
       <img src={blogImage} />
       <form onSubmit={(e) => handleFormSubmit(e)}>
         <h1>Write Wave</h1>
+        {showErrorMsg && (
+          <div className="error-msg">{err ? err : "Error while signing up"}</div>
+        )}
         <input
           onChange={(e) => {
             setFormData((form) => ({ ...form, email: e.target.value }));
@@ -40,7 +59,7 @@ export default function LoginForm() {
           required
           placeholder="Password"
         />
-        <button type="submit">Login</button>
+        <button disabled = {loading} type="submit">{!loading?"Log in": "Loading"}</button>
         <p>Don't have an account <Link to='/signup'>sign up</Link> </p>
       </form>
     </div>

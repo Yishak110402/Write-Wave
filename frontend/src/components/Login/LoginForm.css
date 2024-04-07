@@ -30,10 +30,21 @@
     font-size: 1.05rem;
     border-radius: 20px;
 }
+.login form button:disabled{
+    opacity: 0.8;
+    cursor: not-allowed;
+}
 .login form h1{
     font-family: cursive;
     color: #5d4cff;
 }
 .login p a{
     color: #5d4cff;
+    text-underline-offset: 0.2rem;
+}
+.error-msg{
+    background-color: #ff9274;
+    padding: 0.7rem;
+    border-radius: 12px;
+    color: #560400;
 }
