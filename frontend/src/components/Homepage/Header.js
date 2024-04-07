@@ -1,7 +1,7 @@
-export default function Header(){
+export default function Header({activeUser}){
     return(
         <div>
-            Logged in
+            Hello, {activeUser.name}
         </div>
     )
 }

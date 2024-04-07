@@ -1,5 +1,3 @@
-
-
 .navbar{
     display: flex;
     justify-content: space-between;
@@ -21,4 +19,14 @@
     font-size: 0.95rem;
     text-decoration: none;
     color: #5d4cff;
+}
+.navbar .nav-links button{
+    width: 4rem;
+    height: 2rem;
+    margin-top: -1rem;
+    border: none;
+    border-radius: 12px;
+    background-color: #5d4cff;
+    color: white;
+    cursor: pointer;
 }

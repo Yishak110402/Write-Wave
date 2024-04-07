@@ -12,10 +12,10 @@ export default function App() {
   return (
     <main>
       <BrowserRouter>
-      <Navbar/>
+      <Navbar activeUser={activeUser} setActiveUser={setActiveUser} />
       <Routes>
         <Route path="/" element={<Login/>} />
-        <Route path="/signup" element={<Signup/>} />
+        <Route path="/signup" element={<Signup setActiveUser={setActiveUser}/>} />
         <Route path="/login" element={<Login setActiveUser={setActiveUser} />} />
         <Route path="/home" element={<Homepage activeUser={activeUser}/>} />
       </Routes>

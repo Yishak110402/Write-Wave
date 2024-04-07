@@ -25,6 +25,9 @@ exports.signup = async (req, res) => {
     res.status(200).json({
       status: "success",
       message: "Sign Up Successful",
+      data:{
+        user
+      }
     });
   } catch (err) {
     res.status(400).json({
@@ -45,7 +48,7 @@ exports.login = async (req, res) => {
       });
     }
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select('+password');
     if (!user) {
       return res.status(404).json({
         status: "fail",

@@ -37,7 +37,7 @@ export default function LoginForm({setActiveUser}) {
   }
   return (
     <div className="login">
-      <img src={blogImage} />
+      <img src={blogImage} alt="People looking at a screen" />
       <form onSubmit={(e) => handleFormSubmit(e)}>
         <h1>Write Wave</h1>
         {showErrorMsg && (

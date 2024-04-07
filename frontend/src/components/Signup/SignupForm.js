@@ -3,7 +3,7 @@ import blogImage from "./../../assets/undraw_Blog_post_re_fy5x.png";
 import "./SignupForm.css";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function SignUpForm() {
+export default function SignUpForm({setActiveUser}) {
   const [formData, setFormData] = useState({});
   const [showSuccessMsg, setShowSuccessMsg] = useState(false);
   const [showErrorMsg, setShowErrorMsg] = useState(false);
@@ -28,6 +28,7 @@ export default function SignUpForm() {
     if(!res.ok){
       setShowErrorMsg(true)
       setLoading(false)
+      return
     }
     const data = await res.json();
     console.log(data);
@@ -41,12 +42,13 @@ export default function SignUpForm() {
       setShowSuccessMsg(true);
       setLoading(false)
     }
-    // navigate('/login')
     setLoading(false)
+    setActiveUser(data.data.user)
+    navigate('/home')
   }
   return (
     <div className="signup">
-      <img src={blogImage} />
+      <img src={blogImage} alt="People looking at a screen" />
       <form onSubmit={(e) => handleFormSubmit(e)}>
         <h1>Write Wave</h1>
         {showSuccessMsg && (
