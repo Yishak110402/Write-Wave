@@ -1,0 +1,20 @@
+.feed{
+    padding: 1rem 4rem;
+    color: #5d4cff;
+}
+.posts{
+    margin-top: 2rem;
+}
+.post-link{
+    text-decoration: none;
+    color: #5d4cff;
+}
+.no-posts{
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    margin-top:10rem;
+    font-size: 3rem;
+}
+
+

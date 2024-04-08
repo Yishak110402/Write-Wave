@@ -11,9 +11,11 @@ export default function SignUpForm({setActiveUser}) {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
 
+  console.log(setActiveUser);
+
   async function handleFormSubmit(e) {
     e.preventDefault();
-    setShowSuccessMsg(false);
+    // setShowSuccessMsg(false);
     setShowErrorMsg(false);
     setErr(null)
     setLoading(true)

@@ -1,0 +1,50 @@
+div label{
+    font-size: 1.2rem;
+    color: #5d4cff;
+    margin-left: 6rem;
+}
+.addblog-form{
+    padding: 1rem 4rem;
+}
+
+.title{
+    display: flex;
+    gap: 2rem;
+    margin-top: 3rem;
+}
+.title input{
+    height: 2rem;
+    width: 15rem;
+    padding: 0.5rem;
+    font-size: 1.07rem;
+    color: #5d4cff;
+}
+.content{
+    display: flex;
+    flex-flow: column;
+    margin-top: 4rem;
+    gap: 2rem;
+}
+
+.content textarea{
+    width: 80%;
+    margin: 0 auto;
+    height: 15rem;
+    padding: 1rem;
+    font-size: 1.1rem;
+    color: #5d4cff;
+}
+.addblog-form h1{
+    color: #5d4cff;
+}
+.add-btn{
+    margin-left: 7.8rem;
+    margin-top: 1.5rem;
+    width: 7rem;
+    height: 3rem;
+    font-size: 1rem;
+    border: none;
+    background-color: #5d4cff;
+    color: white;
+    border-radius: 12px;
+}

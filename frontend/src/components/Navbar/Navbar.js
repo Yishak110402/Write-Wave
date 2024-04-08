@@ -34,11 +34,17 @@ export default function Navbar({ activeUser , setActiveUser}) {
             <li>
               <NavLink to="/home">Home</NavLink>
             </li>
-            <li>
+            {/* <li>
               <NavLink to="/posts">My Posts</NavLink>
+            </li> */}
+            <li>
+              <NavLink to="/newblog">New Blog</NavLink>
             </li>
             <li>
               <NavLink to="/search">Search for Users</NavLink>
+            </li>
+            <li>
+              <NavLink to="/profile">My Profile</NavLink>
             </li>
             <li>
              <button onClick={handleSignout} >Sign Out</button>

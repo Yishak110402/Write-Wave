@@ -15,6 +15,7 @@ export default function LoginForm({setActiveUser}) {
     setLoading(true)
     setShowErrorMsg(false)
     setErr(null)
+
     const res = await fetch("http://127.0.0.1:6969/users/login", {
       method: "POST",
       headers: {

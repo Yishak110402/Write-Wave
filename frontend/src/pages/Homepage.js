@@ -1,13 +1,12 @@
-import Header from "../components/Homepage/Header";
+import './Homepage.css'
 
 export default function Homepage({ activeUser }) {
   return (
-    <div>
+    <div className="homepage">
       {!activeUser ? (
         <h2>Please login to access this page</h2>
       ) : (
         <>
-          <Header activeUser={activeUser} />
         </>
       )}
     </div>
