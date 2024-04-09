@@ -1,0 +1,22 @@
+.my-post{
+    background-color: #f7f7f7;
+    color: #5d4cff;
+    margin: 1rem 4rem;
+    display: flex;
+    flex-flow: column;
+    gap: 1rem;
+    padding: 2rem 4rem;
+    border: 2px solid #5d4cff;
+    border-radius: 12px;
+}
+.my-post h3{
+    font-size: 2rem;
+}
+.my-post p{
+    font-size: 1.1rem;
+    font-family: monospace;
+}
+.my-post span{
+    font-size: 0.9rem;
+    font-weight: 600;
+}

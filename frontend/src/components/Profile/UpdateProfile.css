@@ -1,0 +1,15 @@
+.update-profile{
+    padding: 1rem 4rem;
+    color: #5d4cff;
+}
+.update-profile form div{
+    display: flex;
+    justify-content: space-between;
+    width: 45%;
+    margin: 2rem;
+}
+.update-profile input{
+    width: 13rem;
+    height: 1.1rem;
+    padding: 0.5rem;
+}

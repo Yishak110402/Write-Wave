@@ -1,0 +1,21 @@
+.profile-header{
+    background-color: #5d4cff;
+    color: white;
+    padding: 1rem 4rem;
+}
+.profile-header nav ul{
+    display: flex;
+    gap: 3rem;
+    margin-top: 4rem;
+    list-style-type: none;
+}
+.profile-header nav ul li{
+    padding: 0.7rem 3rem;
+    cursor: pointer;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.selected{
+    background-color: white;
+    color: #5d4cff;
+}

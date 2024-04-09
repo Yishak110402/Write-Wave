@@ -12,6 +12,7 @@ const postSchema = new mongoose.Schema({
         trim: true
     },
     createdAt: Date,
+    lastEditted:Date,
     createdBy:{
         type:String,
         required:[true,'A post must have an owner'],

@@ -1,6 +1,6 @@
 const User = require("./../models/userModel");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs")
+const bcrypt = require("bcryptjs");
 
 function signWebToken(id) {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "10d" });
@@ -8,26 +8,26 @@ function signWebToken(id) {
 
 exports.signup = async (req, res) => {
   try {
-    const checkUser = await User.findOne({email: req.body.email})
-    if(checkUser){
+    const checkUser = await User.findOne({ email: req.body.email });
+    if (checkUser) {
       return res.status(400).json({
-        status:"fail",
-        message:"Email already taken"
-      })
+        status: "fail",
+        message: "Email already taken",
+      });
     }
-    if(req.body.password.length < 8){
+    if (req.body.password.length < 8) {
       return res.status(400).json({
-        status:'fail',
-        message:"Password should be longer than 8 characters"
-      })
+        status: "fail",
+        message: "Password should be longer than 8 characters",
+      });
     }
     const user = await User.create(req.body);
     res.status(200).json({
       status: "success",
       message: "Sign Up Successful",
-      data:{
-        user
-      }
+      data: {
+        user,
+      },
     });
   } catch (err) {
     res.status(400).json({
@@ -48,7 +48,7 @@ exports.login = async (req, res) => {
       });
     }
 
-    const user = await User.findOne({ email }).select('+password');
+    const user = await User.findOne({ email }).select("+password");
     if (!user) {
       return res.status(404).json({
         status: "fail",
@@ -56,7 +56,7 @@ exports.login = async (req, res) => {
       });
     }
 
-    const validPassword = await bcrypt.compare(password, user.password)
+    const validPassword = await bcrypt.compare(password, user.password);
 
     if (!validPassword) {
       return res.status(400).json({
@@ -66,11 +66,77 @@ exports.login = async (req, res) => {
     }
 
     res.status(200).json({
-        status: "success",
-        message: "Login successful",
-        data:{
-            user
-        }
-    })
+      status: "success",
+      message: "Login successful",
+      data: {
+        user,
+      },
+    });
   } catch (err) {}
+};
+
+exports.updateUserDetails = async (req, res) => {
+  try {
+    const userData = {}
+    const mainUser = await User.findById(req.params.id).select('+password')
+    if(!mainUser || mainUser.length === 0){
+      return res.status(400).json({
+        status:"fail",
+        message:"No user with that ID"
+      })
+    }
+
+    if (req.body.email) {
+      const user = await User.find({ email: req.body.email });
+      if (user.length !== 0) {
+        return res.status(400).json({
+          status: "fail",
+          message: "Email already taken",
+        });
+      }
+      // mainUser.email = req.body.email
+    }
+
+    if (req.body.oldPassword || req.body.newPassword) {
+      if (!req.body.oldPassword || !req.body.newPassword) {
+        return res.status(404).json({
+          status: "fail",
+          message: "Please fill all the required fields",
+        });
+      }
+      const validPassword = await bcrypt.compare(
+        req.body.oldPassword,
+        mainUser.password
+      );
+      if (!validPassword) {
+        return res.status(400).json({
+          status: "fail",
+          message: "Please enter the correct password",
+        });
+      }
+      if(req.body.newPassword.length < 8){
+        return res.status(400).json({
+          status:"fail",
+          message:"A password should be longer than 8 chars"
+        })
+      }
+
+      const hashedPassword = await bcrypt.hash(req.body.newPassword,12)
+
+      req.body.password = hashedPassword
+      req.body.oldPassword = undefined
+      req.body.newPassword = undefined     
+    }
+    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body)
+
+    res.status(200).json({
+      status: "success",
+      message: "Update successful",
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      message: err,
+    });
+  }
 };

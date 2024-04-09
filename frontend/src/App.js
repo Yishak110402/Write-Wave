@@ -8,6 +8,9 @@ import "./index.css";
 import Feed from "./pages/Feed";
 import AddBlog from "./pages/AddBlog";
 import OpenPost from "./pages/OpenPost";
+import Profile from "./pages/Profile";
+import EditBlog from "./pages/EditBlog";
+
 
 export default function App() {
   const [activeUser, setActiveUser] = useState({
@@ -21,7 +24,7 @@ export default function App() {
       <BrowserRouter>
         <Navbar activeUser={activeUser} setActiveUser={setActiveUser} />
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Feed activeUser={activeUser}/>} />
           <Route
             path="/signup"
             element={<Signup setActiveUser={setActiveUser} />}
@@ -30,12 +33,14 @@ export default function App() {
             path="/login"
             element={<Login setActiveUser={setActiveUser} />}
           />
-          <Route path="/home/:id" element={<OpenPost />} />
           <Route path="/home" element={<Feed activeUser={activeUser} />} />
+          <Route path="/home/:id" element={<OpenPost />} />
           <Route
             path="/newblog"
             element={<AddBlog activeUser={activeUser} />}
           />
+          <Route path="/profile" element={<Profile activeUser={activeUser}/>}/>
+          <Route path="/editblog/:id" element={<EditBlog/>}/>
         </Routes>
       </BrowserRouter>
     </main>
