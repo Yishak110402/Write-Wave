@@ -1,17 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import blogImage from "./../../assets/undraw_Blog_post_re_fy5x.png";
 import "./SignupForm.css";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function SignUpForm({setActiveUser}) {
-  const [formData, setFormData] = useState({});
+export default function SignUpForm({activeUser, setActiveUser}) {
+  const [formData, setFormData] = useState({
+    name:'',
+    email:'',
+    password:''
+  });
   const [showSuccessMsg, setShowSuccessMsg] = useState(false);
   const [showErrorMsg, setShowErrorMsg] = useState(false);
   const [err, setErr] = useState(null)
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
 
-  console.log(setActiveUser);
+ useEffect(function(){
+  if(activeUser){
+    navigate('/home')
+  }
+ },[activeUser])
 
   async function handleFormSubmit(e) {
     e.preventDefault();
@@ -53,9 +61,7 @@ export default function SignUpForm({setActiveUser}) {
       <img src={blogImage} alt="People looking at a screen" />
       <form onSubmit={(e) => handleFormSubmit(e)}>
         <h1>Write Wave</h1>
-        {showSuccessMsg && (
-          <div className="success-msg"> Signup successful please <Link to='/login'>log in</Link></div>
-        )}
+       
         {showErrorMsg && (
           <div className="error-msg">{err ? err : "Error while signing up"}</div>
         )}
@@ -73,7 +79,7 @@ export default function SignUpForm({setActiveUser}) {
           onChange={(e) => {
             setFormData((form) => ({ ...form, email: e.target.value }));
           }}
-          type="email"
+          type="text"
           required
           placeholder="Email"
         />

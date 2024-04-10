@@ -3,7 +3,7 @@ import "./UserDescription.css";
 import MyPosts from "./MyPosts";
 import UpdateProfile from "./UpdateProfile";
 
-export default function UserDescription({activeUser}) {
+export default function UserDescription({activeUser, setActiveUser}) {
   const tabs = ["My Posts", "Update Profile"];
   const [activeTab, setActiveTab] = useState(0);
   return (
@@ -25,7 +25,7 @@ export default function UserDescription({activeUser}) {
         </nav>
       </div>
       {activeTab === 0 && <MyPosts activeUser={activeUser} />}
-      {activeTab === 1 && <UpdateProfile activeUser={activeUser} />}
+      {activeTab === 1 && <UpdateProfile activeUser={activeUser} setActiveUser={setActiveUser} />}
     </>
   );
 }

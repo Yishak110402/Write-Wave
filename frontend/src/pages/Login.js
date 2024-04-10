@@ -1,10 +1,9 @@
 import LoginForm from "../components/Login/LoginForm";
 
-export default function Login({ setActiveUser }) {
-  console.log(setActiveUser);
+export default function Login({activeUser, setActiveUser }) {
   return (
     <>
-      <LoginForm setActiveUser={setActiveUser} />
+      <LoginForm activeUser={activeUser} setActiveUser={setActiveUser} />
     </>
   );
 }

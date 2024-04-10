@@ -1,26 +1,34 @@
 const User = require("./../models/userModel");
-const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const validate = require("validator")
 
-function signWebToken(id) {
-  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "10d" });
-}
 
 exports.signup = async (req, res) => {
+  console.log(req.body.email);
   try {
-    const checkUser = await User.findOne({ email: req.body.email });
-    if (checkUser) {
-      return res.status(400).json({
+    const validEmail = validate.isEmail(req.body.email)
+    if(validEmail===false){
+      return res.json({
+        status:"fail",
+        message:"Invalid email entered"
+      })
+    }
+    console.log("Invalidness checked");
+    const checkUser = await User.find({ email: req.body.email });
+    if (checkUser.length !== 0) {
+      return res.json({
         status: "fail",
         message: "Email already taken",
       });
     }
+    console.log("Checked if email is free");
     if (req.body.password.length < 8) {
-      return res.status(400).json({
+      return res.json({
         status: "fail",
         message: "Password should be longer than 8 characters",
       });
     }
+    console.log("Password length checked");
     const user = await User.create(req.body);
     res.status(200).json({
       status: "success",
@@ -29,10 +37,12 @@ exports.signup = async (req, res) => {
         user,
       },
     });
+    console.log("User created");
   } catch (err) {
+    console.log(err);
     res.status(400).json({
       status: "fail",
-      message: err,
+      message: err.message
     });
   }
 };
@@ -87,6 +97,12 @@ exports.updateUserDetails = async (req, res) => {
     }
 
     if (req.body.email) {
+      if(!validate.isEmail(req.body.email)){
+        return res.json({
+          status:"fail",
+          message:"Invalid email entered"
+        })
+      }
       const user = await User.find({ email: req.body.email });
       if (user.length !== 0) {
         return res.status(400).json({

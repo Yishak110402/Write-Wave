@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Signup from "./pages/Signup";
 import Homepage from "./pages/Homepage";
 import Login from "./pages/Login";
@@ -13,11 +13,22 @@ import EditBlog from "./pages/EditBlog";
 
 
 export default function App() {
-  const [activeUser, setActiveUser] = useState({
-    _id: "6613724b525f9e1d5447c3a8",
-    name: "Yishak Hailu",
-    email: "yishak@gmail.com",
-  });
+  const [activeUser, setActiveUser] = useState(null)
+  // console.log(JSON.parse(localStorage.getItem('activeUser')));
+
+  useEffect(function(){
+    const storedValue = localStorage.getItem('activeUser')
+    if(storedValue == null){
+      return
+    }
+    setActiveUser(JSON.parse(storedValue))
+    },[])
+
+  useEffect(function(){
+    if(activeUser!= null){
+    localStorage.setItem('activeUser', JSON.stringify(activeUser))
+    }
+  },[activeUser, setActiveUser])
 
   return (
     <main>
@@ -27,11 +38,11 @@ export default function App() {
           <Route path="/" element={<Feed activeUser={activeUser}/>} />
           <Route
             path="/signup"
-            element={<Signup setActiveUser={setActiveUser} />}
+            element={<Signup activeUser={activeUser} setActiveUser={setActiveUser} />}
           />
           <Route
             path="/login"
-            element={<Login setActiveUser={setActiveUser} />}
+            element={<Login activeUser={activeUser} setActiveUser={setActiveUser} />}
           />
           <Route path="/home" element={<Feed activeUser={activeUser} />} />
           <Route path="/home/:id" element={<OpenPost />} />
@@ -39,7 +50,7 @@ export default function App() {
             path="/newblog"
             element={<AddBlog activeUser={activeUser} />}
           />
-          <Route path="/profile" element={<Profile activeUser={activeUser}/>}/>
+          <Route path="/profile" element={<Profile activeUser={activeUser} setActiveUser={setActiveUser}/>}/>
           <Route path="/editblog/:id" element={<EditBlog/>}/>
         </Routes>
       </BrowserRouter>

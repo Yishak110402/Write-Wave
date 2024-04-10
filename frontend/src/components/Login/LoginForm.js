@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import blogImage from "./../../assets/undraw_Blog_post_re_fy5x.png";
 import "./LoginForm.css";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function LoginForm({setActiveUser}) {
+export default function LoginForm({activeUser, setActiveUser}) {
   const [formData, setFormData] = useState({});
   const [showErrorMsg, setShowErrorMsg] = useState(false);
   const [err, setErr] = useState(null)
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
+
+ useEffect(function(){
+  if(activeUser){
+    navigate('/home')
+  }
+ },[activeUser])
 
   async function handleFormSubmit(e) {
     e.preventDefault();

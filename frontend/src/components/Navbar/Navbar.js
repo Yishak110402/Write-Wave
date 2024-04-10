@@ -6,6 +6,7 @@ export default function Navbar({ activeUser , setActiveUser}) {
   const navigate = useNavigate()
 
   function handleSignout(){
+    localStorage.removeItem('activeUser')
     setActiveUser(null)
     navigate('/login')
   }

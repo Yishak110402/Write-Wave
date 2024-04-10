@@ -13,3 +13,31 @@
     height: 1.1rem;
     padding: 0.5rem;
 }
+.update-profile form button{
+    background-color: #5d4cff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    height: 3rem;
+    width: 8rem;
+    font-size: 1rem;
+    margin-left: 34rem;
+}
+.update-success-msg{
+    background-color: #8bff97;
+    padding: 0.7rem;
+    border-radius: 12px;
+    color: #005804;
+    width: 20%;
+    margin: 0 auto;
+    text-align: center;
+}
+.update-error-msg{
+    background-color: #ff9274;
+    padding: 0.7rem;
+    border-radius: 12px;
+    color: #560400;
+    width: 20%;
+    margin: 0 auto;
+    text-align: center;
+}

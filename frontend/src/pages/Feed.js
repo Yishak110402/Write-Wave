@@ -9,7 +9,6 @@ export default function Feed({ activeUser }) {
   useEffect(function(){
       if(!activeUser){
           navigate('/login')
-
       }
   },[])
 
@@ -17,7 +16,6 @@ export default function Feed({ activeUser }) {
     async function getAllPosts() {
       const res = await fetch("http://127.0.0.1:6969/posts");
       const data = await res.json();
-      console.log(data);
       setPosts(data.data.posts);
     }
     getAllPosts();

@@ -10,13 +10,19 @@ app.use(cors())
 app.use('/users', userRouter)
 app.use('/posts', postRouter)
 
+console.log(process.env.URL);
+const mongoURL = "mongodb+srv://yishak:rfTtsGRqkPr5ILhL@write-wave.3yjawuk.mongodb.net/writewave?retryWrites=true&w=majority&appName=write-wave"
+const localMongoURL = "mongodb://127.0.0.1:27017/writewave"
 
-mongoose.connect("mongodb://127.0.0.1:27017/writewave",{
+
+mongoose.connect(localMongoURL,{
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false
 }).then(()=>{
     console.log("DB Connection Successful");
+}).catch((err)=>{
+    console.log(err.message);
 })
 
 
