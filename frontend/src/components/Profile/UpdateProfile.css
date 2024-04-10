@@ -1,6 +1,7 @@
 .update-profile{
     padding: 1rem 4rem;
     color: #5d4cff;
+    /* position: relative; */
 }
 .update-profile form div{
     display: flex;
@@ -21,7 +22,6 @@
     height: 3rem;
     width: 8rem;
     font-size: 1rem;
-    margin-left: 34rem;
 }
 .update-success-msg{
     background-color: #8bff97;
@@ -40,4 +40,54 @@
     width: 20%;
     margin: 0 auto;
     text-align: center;
+}
+.delete-confirm-modal{
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    height: 100vh;
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.delete-confirm-modal > div{
+    width: 50%;
+    height: 50%;
+    background-color: white;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 10px;
+    animation: show-modal 0.3s linear forwards;
+}
+.confirm-btns{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+}
+.confirm-btns button{
+    /* width: 5rem; */
+    padding: 1rem 2rem;
+    height: 3rem;
+    background-color: #5d4cff;
+    color: white;
+    border: none;
+  
+}
+@keyframes show-modal{
+    from{
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    to{
+        opacity: 1;
+        transform: scale(1);
+    }
 }

@@ -6,14 +6,21 @@ export default function UpdateProfile({ activeUser, setActiveUser }) {
   const [formData, setFormData] = useState({});
   const [showSuccessMsg, setShowSuccessMsg] = useState(false);
   const [showErrorMsg, setShowErrorMsg] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [err, setErr] = useState(null);
   const navigate = useNavigate()
-
+  if(formData.name == ""){
+    setFormData((form)=>({...form, name: undefined}))
+  }
+  if(formData.email == ""){
+    setFormData((form)=>({...form, email: undefined}))
+  }
   async function handleUpdateForm(e) {
     setShowSuccessMsg(false);
     setShowErrorMsg(false);
-    
-
+    if(formData == {}){
+      return
+    }
     e.preventDefault();
     try {
       const res = await fetch(`http://127.0.0.1:6969/users/${activeUser._id}`, {
@@ -39,6 +46,28 @@ export default function UpdateProfile({ activeUser, setActiveUser }) {
       }
       setFormData({});
     } catch (err) {}
+  }
+
+  async function handleDeleteAccount(){
+    try{
+      const res = await fetch(`http://127.0.0.1:6969/users/${activeUser._id}`,{
+        method:"DELETE",
+        headers:{
+          "Content-type":"application/json"
+        }
+      })
+      const data = await res.json()
+      if(data.status === "success"){
+        setActiveUser(null)
+        navigate('/login')
+      }
+      if(data.status === "fail"){
+        setErr(data.message)
+        setShowErrorMsg(true)
+      }
+    }catch(err){
+
+    }
   }
 
   return (
@@ -93,8 +122,23 @@ export default function UpdateProfile({ activeUser, setActiveUser }) {
             }
           />
         </div>
+        <div className="account-btns">
         <button type="submit">Update profile</button>
+        <button type="button" className="delete-btn" onClick={()=>(setShowDeleteModal(true))}>Delete Account</button>
+        </div>
       </form>
+        {showDeleteModal && (
+          <div className="delete-confirm-modal">
+          <div>
+            <h2>Are you sure you want to delete your account?</h2>
+            <span>All your posts and your account will be deleted permanently</span>
+            <div className="confirm-btns">
+              <button onClick={handleDeleteAccount}>Yes, I'm Sure</button>
+              <button onClick={()=>(setShowDeleteModal(false))}>Cancel</button>
+            </div>
+          </div>
+        </div>
+        )}
     </div>
   );
 }
