@@ -3,16 +3,27 @@
     justify-content: space-between;
     padding: 0.8rem 6rem;
     color: #5d4cff;
-    padding-right: 7rem;
 }
 .nav-links{
     display: flex;
     gap: 2rem;
     list-style-type: none;
+    /* margin-right: -10rem; */
 }
 .nav-links a{
     text-decoration: none;
     color: #5d4cff;
+    transition: all 0.5s ease;
+}
+.nav-links a:hover{
+    text-decoration: underline;
+    text-decoration-color: #5d4cff;
+    text-underline-offset: 0.5rem;transition: all 0.5s ease;
+}
+.nav-links .active{
+    text-decoration: underline;
+    text-decoration-color: #5d4cff;
+    text-underline-offset: 0.5rem;transition: all 0.5s ease;
 }
 .navbar .logo a{
     font-family: cursive;
@@ -29,4 +40,70 @@
     background-color: #5d4cff;
     color: white;
     cursor: pointer;
+}
+.mobile-nav-links{
+    display: none;
+}
+.mobile-nav-links button{
+    width: 100%;
+    height: 2rem;
+    margin-top: -1rem;
+    border: none;
+    border-radius: 12px;
+    background-color: #5d4cff;
+    color: white;
+    cursor: pointer;
+}
+.dropdown-btn{
+    display: none;
+}
+@media(max-width:900px){
+    .navbar{
+        padding-right: 4rem;
+    }
+}
+@media(max-width:700px){
+    .nav-links{
+        display: none;
+    }
+    .dropdown-btn{
+        display: block;
+    }
+    .mobile-nav-links{
+        display: block;
+    }
+    .navbar{
+        position: relative;
+        z-index: 10;
+        padding-left: 1rem;
+    }
+    .dropdown-btn svg{
+        fill: #5d4cff;
+        position: absolute;
+        top: 0rem;
+        right: 2rem;
+        width: 50px;
+        height: 50px;
+    }
+    .mobile-nav-links{
+        list-style-type: none;
+        position: absolute;
+        top: 3.5rem;
+        right: 0;
+        z-index: -5;
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+        gap: 3rem;
+        background-color: white;
+        padding: 1rem;
+        margin-right: 1rem;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+        transition: all 0.3s ease;
+    }
+    .mobile-nav-links li a{
+        text-decoration: none;
+        color: #5d4cff;
+    }
 }

@@ -3,6 +3,9 @@
     width: 100vw;
     background-size: cover;
     background-position: top 40%;
+    overflow-x: hidden;
+    position: relative;
+
 }
 .hero-text{
     width: 100%;
@@ -36,4 +39,12 @@
     border-radius: 12px;
     padding: 0.5rem 1rem;
     font-size: 1.1rem;
+    transition: all 0.3s ease;
+    border: 2px solid white;
+    cursor: pointer;
+}
+.hero-text .cta-btns button:hover{
+    color: white;
+    /* background-color: #5d4cff; */
+    background-color: transparent;
 }
