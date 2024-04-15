@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom"
+import Loader from './../components/Loader/Loader'
+import './EditBlog.css'
 
 export default function EditBlog(){
     const [formData, setFormData] = useState({})
@@ -7,7 +9,7 @@ export default function EditBlog(){
     useEffect(function(){
         async function getPost(){
             setLoading(true)
-            const res = await fetch(`http://127.0.0.1:6969/posts/${params.id}`)
+            const res = await fetch(`https://writewave-backend-api.onrender.com/posts/${params.id}`)
             const data = await res.json()
             console.log(data);
             setFormData((form)=>({...form, content: data.data.post.content, title: data.data.post.title}))
@@ -17,11 +19,10 @@ export default function EditBlog(){
     },[])
     const params = useParams()
     const navigate = useNavigate()
-    console.log(params);
 
     async function handleFormSubmit(e){
         e.preventDefault()
-        const res = await fetch(`http://127.0.0.1:6969/posts/${params.id}`,{
+        const res = await fetch(`https://writewave-backend-api.onrender.com/posts/${params.id}`,{
             method:"PATCH",
             headers:{
                 "Content-type":"application/json"
@@ -36,7 +37,7 @@ export default function EditBlog(){
     return(
       <>
       {
-        loading?<div>Loading...</div>:(
+        loading? <Loader/>:(
             <form className="addblog-form" onSubmit={(e)=> handleFormSubmit(e)} >
             <h1>Edit blog</h1>
             <button onClick={()=>(navigate(-1))} >Back to profile</button>

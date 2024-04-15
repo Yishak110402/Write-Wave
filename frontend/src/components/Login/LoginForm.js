@@ -12,7 +12,7 @@ export default function LoginForm({activeUser, setActiveUser}) {
 
  useEffect(function(){
   if(activeUser){
-    navigate('/home')
+    navigate('/feed')
   }
  },[activeUser])
 
@@ -22,7 +22,7 @@ export default function LoginForm({activeUser, setActiveUser}) {
     setShowErrorMsg(false)
     setErr(null)
 
-    const res = await fetch("http://127.0.0.1:6969/users/login", {
+    const res = await fetch("https://writewave-backend-api.onrender.com/users/login", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -39,7 +39,7 @@ export default function LoginForm({activeUser, setActiveUser}) {
     }
     setLoading(false)
     setActiveUser(data.data.user)
-    navigate('/home')
+    navigate('/feed')
 
   }
   return (

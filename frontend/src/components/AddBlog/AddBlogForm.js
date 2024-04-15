@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom"
 import "./AddBlogForm.css";
 
 export default function AddBlogForm({ activeUser }) {
+  const [adding, setAdding] = useState(false)
   const [formData, setFormData] = useState({
     createdBy: activeUser._id,
     creatorName: activeUser.name,
@@ -11,8 +12,9 @@ export default function AddBlogForm({ activeUser }) {
   const navigate = useNavigate()
 
   async function handleFormSubmit(e) {
+    setAdding(true)
     e.preventDefault();
-    const res = await fetch("http://127.0.0.1:6969/posts", {
+    const res = await fetch("https://writewave-backend-api.onrender.com/posts", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -21,7 +23,8 @@ export default function AddBlogForm({ activeUser }) {
     });
     const data = await res.json();
     console.log(data);
-    navigate('/home')
+    navigate('/feed')
+    setAdding(false)
   }
 
   return (
@@ -46,8 +49,8 @@ export default function AddBlogForm({ activeUser }) {
           required
         />
       </div>
-      <button className="add-btn" type="submit">
-        Add Blog
+      <button disabled={adding} className="add-btn" type="submit">
+        {adding ? "Adding..." : "Add Blog"}
       </button>
     </form>
   );

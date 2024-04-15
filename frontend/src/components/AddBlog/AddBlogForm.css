@@ -48,3 +48,7 @@ div label{
     color: white;
     border-radius: 12px;
 }
+.add-btn:disabled{
+    opacity: 0.8;
+    cursor:not-allowed ;
+}

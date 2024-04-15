@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Signup from "./pages/Signup";
-import Homepage from "./pages/Homepage";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar/Navbar";
 import "./index.css";
@@ -10,6 +9,7 @@ import AddBlog from "./pages/AddBlog";
 import OpenPost from "./pages/OpenPost";
 import Profile from "./pages/Profile";
 import EditBlog from "./pages/EditBlog";
+import Homepage from "./pages/Homepage";
 
 
 export default function App() {
@@ -35,7 +35,7 @@ export default function App() {
       <BrowserRouter>
         <Navbar activeUser={activeUser} setActiveUser={setActiveUser} />
         <Routes>
-          <Route path="/" element={<Feed activeUser={activeUser}/>} />
+          <Route path="/" element={<Homepage activeUser={activeUser}/>} />
           <Route
             path="/signup"
             element={<Signup activeUser={activeUser} setActiveUser={setActiveUser} />}
@@ -44,8 +44,8 @@ export default function App() {
             path="/login"
             element={<Login activeUser={activeUser} setActiveUser={setActiveUser} />}
           />
-          <Route path="/home" element={<Feed activeUser={activeUser} />} />
-          <Route path="/home/:id" element={<OpenPost />} />
+          <Route path="/feed" element={<Feed activeUser={activeUser} />} />
+          <Route path="/feed/:id" element={<OpenPost />} />
           <Route
             path="/newblog"
             element={<AddBlog activeUser={activeUser} />}

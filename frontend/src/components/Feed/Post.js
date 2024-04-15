@@ -6,7 +6,7 @@ export default function Post({post}) {
   const edittedTime = new Date(post.lastEditted).toLocaleString();
  
   return (
-    <Link className='post-link' to ={`/home/${post._id}`} >
+    <Link className='post-link' to ={`/feed/${post._id}`} >
     <div className="post">
       <span>{post.creatorName}</span>
       <h3>{post.title}</h3>

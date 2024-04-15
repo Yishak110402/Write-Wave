@@ -20,3 +20,7 @@
     font-size: 0.9rem;
     font-weight: 600;
 }
+.my-post button:disabled{
+    opacity: 0.8;
+    cursor: not-allowed;
+}

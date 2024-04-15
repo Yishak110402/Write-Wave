@@ -17,7 +17,7 @@ export default function SignUpForm({activeUser, setActiveUser}) {
 
  useEffect(function(){
   if(activeUser){
-    navigate('/home')
+    navigate('/feed')
   }
  },[activeUser])
 
@@ -28,7 +28,7 @@ export default function SignUpForm({activeUser, setActiveUser}) {
     setErr(null)
     setLoading(true)
 
-    const res = await fetch("http://127.0.0.1:6969/users/signup", {
+    const res = await fetch("https://writewave-backend-api.onrender.com/users/signup", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -54,7 +54,7 @@ export default function SignUpForm({activeUser, setActiveUser}) {
     }
     setLoading(false)
     setActiveUser(data.data.user)
-    navigate('/home')
+    navigate('/feed')
   }
   return (
     <div className="signup">

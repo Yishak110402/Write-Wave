@@ -1,0 +1,27 @@
+/* HTML: <div class="loader"></div> */
+.loader-container{
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loader {
+    width: 85px;
+    height: 35px;
+    --g1:conic-gradient(from  90deg at 3px  3px ,#5d4cff 90deg,#5d4cff 0);
+    --g2:conic-gradient(from -90deg at 22px 22px,#5d4cff 90deg,#5d4cff 0);
+    background:var(--g1),var(--g1),var(--g1), var(--g2),var(--g2),var(--g2);
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    animation: l6 0.7s infinite alternate;
+    /* border: 1px solid red; */
+  }
+  @keyframes l6 {
+    0%   {background-position:0 50% ,50% 50% ,100% 50% }
+    20%  {background-position:0 0   ,50% 50% ,100% 50% }
+    40%  {background-position:0 100%,50%  0  ,100% 50% }
+    60%  {background-position:0 50% ,50% 100%,100% 0   }
+    80%  {background-position:0 50% ,50% 50% ,100% 100%}
+    100% {background-position:0 50% ,50% 50% ,100% 50% }
+  }

@@ -1,14 +1,11 @@
-import './Homepage.css'
+import About from "../components/Homepage/About";
+import Hero from "../components/Homepage/Hero";
 
 export default function Homepage({ activeUser }) {
-  return (
-    <div className="homepage">
-      {!activeUser ? (
-        <h2>Please login to access this page</h2>
-      ) : (
-        <>
-        </>
-      )}
+  return(
+    <div>
+      <Hero activeUser={activeUser}/>
+      <About/>
     </div>
   );
 }

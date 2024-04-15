@@ -14,13 +14,16 @@ export default function Navbar({ activeUser , setActiveUser}) {
   return (
     <nav className="navbar">
       <div className="logo">
-        <NavLink to="/home">
+        <NavLink to="/">
           <h1>Write Wave</h1>
         </NavLink>
       </div>
       <ul className="nav-links">
         {!activeUser && (
           <>
+          <li>
+            <NavLink to='/'>Home</NavLink>
+          </li>
             <li>
               <NavLink to="/signup">Sign up</NavLink>
             </li>
@@ -33,7 +36,10 @@ export default function Navbar({ activeUser , setActiveUser}) {
           activeUser && (
             <>
             <li>
-              <NavLink to="/home">Home</NavLink>
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to='/feed' >Feed</NavLink>
             </li>
             <li>
               <NavLink to="/newblog">New Blog</NavLink>

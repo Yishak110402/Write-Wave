@@ -41,6 +41,15 @@
     margin: 0 auto;
     text-align: center;
 }
+.progress-msg{
+    background-color: #ffe42d;
+    padding: 0.7rem;
+    border-radius: 12px;
+    color: #473800;
+    width: 20%;
+    margin: 0 auto;
+    text-align: center;
+}
 .delete-confirm-modal{
     position: fixed;
     width: 100vw;
@@ -64,6 +73,8 @@
     gap: 1rem;
     border-radius: 10px;
     animation: show-modal 0.3s linear forwards;
+    border: 2px solid #5d4cff;
+    box-shadow: 10px 15px 50px black;
 }
 .confirm-btns{
     width: 100%;
@@ -73,12 +84,20 @@
 }
 .confirm-btns button{
     /* width: 5rem; */
+    border-radius: 20px;
     padding: 1rem 2rem;
     height: 3rem;
     background-color: #5d4cff;
     color: white;
     border: none;
   
+}
+.confirm-btns button:disabled{
+    opacity: 0.8;
+    cursor:not-allowed;
+}
+#delete-btn{
+    background-color: #ff1a00;
 }
 @keyframes show-modal{
     from{
