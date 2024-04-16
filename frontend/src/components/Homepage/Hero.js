@@ -20,7 +20,9 @@ export default function Hero({ activeUser }) {
               <button onClick={() => navigate("/login")}>Log In</button>
             </>
           ) : (
+            <>
             <button onClick={()=> navigate('/feed')}>Continue Blogging</button>
+            </>
           )}
         </div>
       </div>

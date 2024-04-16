@@ -43,8 +43,35 @@
     border: 2px solid white;
     cursor: pointer;
 }
-.hero-text .cta-btns button:hover{
+.hero-text .cta-btns button:hover,
+.hero-text .cta-btns button:focus{
     color: white;
     /* background-color: #5d4cff; */
     background-color: transparent;
+}
+
+@media(max-width:770px){
+    .hero-text{
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    .hero-text h1{
+        font-size: 2.5rem;
+    }
+    .hero-text p{
+        font-size: 1rem;
+    }
+}
+@media(max-width:500px){
+    .hero-text{
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .hero-text h1{
+        font-size: 1.6rem;
+    }
+    .hero-text p{
+        display: inline;
+        width: 80%;
+    }
 }
