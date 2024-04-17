@@ -62,7 +62,7 @@
         padding-right: 4rem;
     }
 }
-@media(max-width:700px){
+@media(max-width:750px){
     .nav-links{
         display: none;
     }
@@ -94,16 +94,20 @@
         display: flex;
         flex-flow: column;
         justify-content: space-between;
-        gap: 3rem;
+        gap: 2rem;
         background-color: white;
         padding: 1rem;
         margin-right: 1rem;
         border-bottom-left-radius: 12px;
         border-bottom-right-radius: 12px;
-        transition: all 0.3s ease;
+        transition: all 0.25s ease;
     }
+    
     .mobile-nav-links li a{
         text-decoration: none;
         color: #5d4cff;
+        width: 100%;
+        /* padding: 0.5rem 1rem; */
+
     }
 }

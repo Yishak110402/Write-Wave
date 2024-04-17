@@ -19,3 +19,20 @@
     background-color: white;
     color: #5d4cff;
 }
+
+@media(max-width:550px){
+    .profile-header h1{
+        font-size: 1.3rem;
+    }
+    .profile-header nav ul{
+        margin-top: 2rem;
+    }
+    .profile-header nav ul li{
+        font-size: 0.9rem;
+    }
+}
+@media(max-width: 400px){
+    .profile-header{
+        padding: 1rem ;
+    }
+}

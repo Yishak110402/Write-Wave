@@ -1,0 +1,22 @@
+.page-not-found{
+    width: 100vw;
+    text-align: center;
+    padding: 0;
+}
+.page-not-found img{
+    width: 70vw;
+    height: 70vh;
+    margin: 0 auto;
+    /* object-fit: cover; */
+}
+.page-not-found p{
+    color: #5d4cff;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+@media(max-width:600px){
+    .page-not-found img{
+        width: 100vw;
+        height: 50vh;
+    }
+}

@@ -10,11 +10,11 @@ import OpenPost from "./pages/OpenPost";
 import Profile from "./pages/Profile";
 import EditBlog from "./pages/EditBlog";
 import Homepage from "./pages/Homepage";
+import PageNotFound from "./pages/PageNotFound";
 
 
 export default function App() {
   const [activeUser, setActiveUser] = useState(null)
-  // console.log(JSON.parse(localStorage.getItem('activeUser')));
 
   useEffect(function(){
     const storedValue = localStorage.getItem('activeUser')
@@ -52,6 +52,7 @@ export default function App() {
           />
           <Route path="/profile" element={<Profile activeUser={activeUser} setActiveUser={setActiveUser}/>}/>
           <Route path="/editblog/:id" element={<EditBlog/>}/>
+          <Route path="*" element={<PageNotFound/>} />
         </Routes>
       </BrowserRouter>
     </main>

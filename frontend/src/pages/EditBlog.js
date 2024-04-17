@@ -6,6 +6,7 @@ import './EditBlog.css'
 export default function EditBlog(){
     const [formData, setFormData] = useState({})
     const [loading, setLoading] = useState(false)
+    const [editting, setEditting] = useState(false)
     useEffect(function(){
         async function getPost(){
             setLoading(true)
@@ -22,6 +23,7 @@ export default function EditBlog(){
 
     async function handleFormSubmit(e){
         e.preventDefault()
+        setEditting(true)
         const res = await fetch(`https://writewave-backend-api.onrender.com/posts/${params.id}`,{
             method:"PATCH",
             headers:{
@@ -30,7 +32,7 @@ export default function EditBlog(){
             body: JSON.stringify(formData)
         })
         const data =await res.json()
-        console.log(data);
+        setEditting(false)
         navigate('/profile')
     }
 
@@ -40,7 +42,7 @@ export default function EditBlog(){
         loading? <Loader/>:(
             <form className="addblog-form" onSubmit={(e)=> handleFormSubmit(e)} >
             <h1>Edit blog</h1>
-            <button onClick={()=>(navigate(-1))} >Back to profile</button>
+            <button className="back-btn" onClick={()=>(navigate(-1))} >Back to profile</button>
             <div className="title">
               <label>Blog title</label>
               <input
@@ -58,8 +60,8 @@ export default function EditBlog(){
                 required
               />
             </div>
-            <button className="add-btn" type="submit">
-              Edit Blog
+            <button disabled={editting} className="add-btn" type="submit">
+              {editting ? "Editting...":"Edit Blog"}
             </button>
           </form>
         )

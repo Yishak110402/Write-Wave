@@ -16,4 +16,26 @@
 .post span{
     font-size: 0.85rem;
     font-weight: 600;
+    text-wrap: nowrap;
+}
+@media(max-width: 835px){
+    .post h3{
+        font-size: 1.7rem;
+    }
+}
+@media(max-width: 580px){
+    .post h3{
+        font-size: 1.3rem;
+        margin: 0.7rem 0;
+    }
+}
+@media(max-width: 500px){
+    .post{
+        width: 95%;
+        padding: 1rem 0.5rem;
+        margin: 0.5rem 0;
+    }
+    .post h3{
+        font-size: 1.1rem;
+    }
 }

@@ -18,6 +18,8 @@ div label{
     padding: 0.5rem;
     font-size: 1.07rem;
     color: #5d4cff;
+    border: 1px solid #5d4cff;
+    border-radius: 12px;
 }
 .content{
     display: flex;
@@ -33,6 +35,8 @@ div label{
     padding: 1rem;
     font-size: 1.1rem;
     color: #5d4cff;
+    border: 1px solid #5d4cff;
+    border-radius: 12px;
 }
 .addblog-form h1{
     color: #5d4cff;
@@ -51,4 +55,31 @@ div label{
 .add-btn:disabled{
     opacity: 0.8;
     cursor:not-allowed ;
+}
+
+@media(max-width:950px){
+    .addblog-form{
+        padding: 1rem 2rem;
+    }
+    .add-btn{
+        margin-left: 5rem;
+    }
+}
+@media(max-width:650px){
+    .addblog-form h1{
+        margin-left: 3rem;
+    }
+    .addblog-form{
+        padding: 1rem 0;
+    }
+    .addblog-form label{
+        margin-left: 2rem;
+        font-size: 1rem;
+    }
+    .content{
+        margin-top: 2rem;
+    }
+    .addblog-form div{
+        gap: 0.5rem;
+    }
 }

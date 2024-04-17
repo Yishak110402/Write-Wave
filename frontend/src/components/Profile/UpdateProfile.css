@@ -1,7 +1,6 @@
 .update-profile{
     padding: 1rem 4rem;
     color: #5d4cff;
-    /* position: relative; */
 }
 .update-profile form div{
     display: flex;
@@ -13,6 +12,8 @@
     width: 13rem;
     height: 1.1rem;
     padding: 0.5rem;
+    border: 1px solid #5d4cff;
+    border-radius: 12px;
 }
 .update-profile form button{
     background-color: #5d4cff;
@@ -108,5 +109,72 @@
     to{
         opacity: 1;
         transform: scale(1);
+    }
+}
+
+@media(max-width: 1000px){
+    .update-profile{
+        padding: 1rem 2rem;
+    }
+    .update-profile label{
+        margin-left: 4rem;
+        font-size: 1.2rem;
+    }
+}
+@media(max-width:850px){
+    .update-profile form{
+        margin-right: 2rem;
+    }
+    .update-profile form > div{
+        margin-right: 1.5rem;
+        width: 100%;
+    }
+    .update-profile label{
+        margin-left: 1.5rem;
+    }
+    .update-profile input{
+        margin-left: 1rem;
+    }
+    .account-btns{
+        justify-content: center;
+        align-items: center;
+        /* width: 100vw; */
+    }
+}
+@media(max-width:1090px){
+    .delete-confirm-modal > div{
+        width: 80%;
+    }
+    .delete-confirm-modal > div h2{
+        font-size: 1.1rem;
+    }
+    .delete-confirm-modal > div span{
+        font-size: 0.9rem;
+    }
+}
+@media(max-width: 700px){
+    .progress-msg, .update-error-msg, .update-success-msg{
+        width: 50%;
+    }
+}
+@media(max-width: 500px){
+    .update-profile{
+        padding: 1rem 0.5rem;
+    }
+    .update-profile label{
+        font-size: 0.9rem;
+        margin-left: 0;
+    }
+    .account-btns button{
+        /* padding: 1rem; */
+        width: 2rem;
+        height: 1rem;
+    }
+    .delete-confirm-modal > div{
+        text-align: center;
+        width: 90%;
+    }
+    .delete-confirm-modal > div h2{
+        font-size: 1rem;
     }
 }

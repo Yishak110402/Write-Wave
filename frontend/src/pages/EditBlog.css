@@ -1,0 +1,16 @@
+.back-btn{
+    margin-left: 7.8rem;
+    margin-top: 1rem;
+    width: 7rem;
+    height: 3rem;
+    font-size: 1rem;
+    border: none;
+    background-color: #5d4cff;
+    color: white;
+    border-radius: 12px;
+}
+@media(max-width: 630px){
+    .back-btn{
+        margin-left: 3rem;
+    }
+}
