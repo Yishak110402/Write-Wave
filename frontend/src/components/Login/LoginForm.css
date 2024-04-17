@@ -48,3 +48,44 @@
     border-radius: 12px;
     color: #560400;
 }
+@media(max-width:1200px){
+    .login img{
+        width: 70%;
+        height: 100%;
+    }
+    .login form{
+        margin-top: -3rem;
+    }
+
+}
+@media(max-width:1000px){
+    .login form{
+        margin-top: 5rem;
+    }
+}
+@media(max-width: 700px){
+    .login{
+        height: 100vh;
+        position: relative;
+        display: block;
+        overflow-x: hidden;
+    }
+    .login img{
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        top: -30%;
+        left: 0;
+        z-index: -1000; 
+        object-fit: cover;       
+    }
+    .login form{
+        width: 100vw;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        backdrop-filter: blur(10px);
+        margin-top: 0;
+        /* background-color: #f7f7f7; */
+    }
+}
