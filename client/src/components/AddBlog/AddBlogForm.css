@@ -82,4 +82,7 @@ div label{
     .addblog-form div{
         gap: 0.5rem;
     }
+    .addblog-form input, .addblog-form textarea{
+        font-size: 0.9rem;
+    }
 }
