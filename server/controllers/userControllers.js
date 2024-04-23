@@ -71,8 +71,29 @@ exports.deleteUser = async (req, res) => {
     });
   } catch (err) {
     res.status(400).json({
-      status:"fail",
-      message:err
-    })
+      status: "fail",
+      message: err,
+    });
   }
+};
+
+exports.confirmUser = async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+  if (!user || user.length === 0 || req.params.id < 24) {
+    return res.json({
+      status: "fail",
+      message: "User not found",
+    });
+  }
+  next();
+};
+
+exports.addProfilePic = async (req, res) => {
+  const user = await User.findByIdAndUpdate(req.params.id, {
+    profilePicture: req.file.filename,
+  });
+  res.status(200).json({ 
+    status: "success",
+    message: "Profile uploaded",
+  });
 };

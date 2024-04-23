@@ -6,6 +6,7 @@ const userRouter = require('./routes/userRoutes.js')
 const postRouter = require('./routes/postRoutes.js')
 
 app.use(express.json())
+app.use(express.static("./public"))
 app.use(cors())
 app.use('/users', userRouter)
 app.use('/posts', postRouter)
