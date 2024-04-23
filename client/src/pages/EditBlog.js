@@ -9,8 +9,9 @@ export default function EditBlog(){
     const [editting, setEditting] = useState(false)
     useEffect(function(){
         async function getPost(){
+          const renderURL = `https://writewave-backend-api.onrender.com/posts/${params.id}`
             setLoading(true)
-            const res = await fetch(`https://writewave-backend-api.onrender.com/posts/${params.id}`)
+            const res = await fetch(`http://127.0.0.1:6969/posts/${params.id}`)
             const data = await res.json()
             console.log(data);
             setFormData((form)=>({...form, content: data.data.post.content, title: data.data.post.title}))
@@ -24,7 +25,8 @@ export default function EditBlog(){
     async function handleFormSubmit(e){
         e.preventDefault()
         setEditting(true)
-        const res = await fetch(`https://writewave-backend-api.onrender.com/posts/${params.id}`,{
+        const renderURL = `https://writewave-backend-api.onrender.com/posts/${params.id}`
+        const res = await fetch(`http://127.0.0.1:6969/posts/${params.id}`,{
             method:"PATCH",
             headers:{
                 "Content-type":"application/json"

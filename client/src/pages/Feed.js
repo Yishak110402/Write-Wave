@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Feed.css";
 import Post from "../components/Feed/Post";
-import Loader from './../components/Loader/Loader'
+import Loader from "./../components/Loader/Loader";
 
 export default function Feed({ activeUser }) {
   const [loading, setLoading] = useState(false);
@@ -16,10 +16,9 @@ export default function Feed({ activeUser }) {
 
   useEffect(function () {
     async function getAllPosts() {
+      const renderURL = "https://writewave-backend-api.onrender.com/posts";
       setLoading(true);
-      const res = await fetch(
-        "https://writewave-backend-api.onrender.com/posts"
-      );
+      const res = await fetch("http://127.0.0.1:6969/posts");
       const data = await res.json();
       setPosts(data.data.posts);
       setLoading(false);
@@ -32,7 +31,7 @@ export default function Feed({ activeUser }) {
       <h1>Recent Posts</h1>
       <div className="posts">
         {loading ? (
-          <Loader/>
+          <Loader />
         ) : posts.length === 0 ? (
           <div className="no-posts"> Oops!! Looks like the feed is empty</div>
         ) : (

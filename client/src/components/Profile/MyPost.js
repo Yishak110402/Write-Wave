@@ -9,8 +9,9 @@ export default function MyPost({ post, setRerender }) {
   const navigate = useNavigate();
 
   async function handleDeleteBlog() {
+    const renderURL =`https://writewave-backend-api.onrender.com/posts/${post._id}`
     setDeleting(true)
-    const res = await fetch(`https://writewave-backend-api.onrender.com/posts/${post._id}`, {
+    const res = await fetch(`http://127.0.0.1:6969/posts/${post._id}`, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json",

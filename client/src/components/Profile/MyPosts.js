@@ -11,9 +11,8 @@ export default function MyPosts({ activeUser }) {
     function () {
       async function getUserPosts() {
         setLoading(true);
-        const res = await fetch(
-          `https://writewave-backend-api.onrender.com/users/posts/${activeUser._id}`
-        );
+        const renderURL = `https://writewave-backend-api.onrender.com/users/posts/${activeUser._id}`
+        const res = await fetch(`http://127.0.0.1:6969/users/posts/${activeUser._id}`);
         const data = await res.json();
         console.log(data);
         setMyposts(data.data.posts);

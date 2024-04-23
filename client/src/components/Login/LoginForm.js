@@ -24,17 +24,15 @@ export default function LoginForm({ activeUser, setActiveUser }) {
     setLoading(true);
     setShowErrorMsg(false);
     setErr(null);
+    const renderURL = "https://writewave-backend-api.onrender.com/users/login";
 
-    const res = await fetch(
-      "https://writewave-backend-api.onrender.com/users/login",
-      {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      }
-    );
+    const res = await fetch("http://127.0.0.1:6969/users/login", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
     if (!res) {
       setErr("Failed fetching data");
       setShowErrorMsg(true);

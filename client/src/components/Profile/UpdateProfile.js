@@ -21,21 +21,20 @@ export default function UpdateProfile({ activeUser, setActiveUser }) {
     e.preventDefault();
     setShowSuccessMsg(false);
     setShowErrorMsg(false);
+    const renderURL = `https://writewave-backend-api.onrender.com/users/${activeUser._id}`;
     if (formData == {}) {
       return;
     }
     setShowProgress(true);
+
     try {
-      const res = await fetch(
-        `https://writewave-backend-api.onrender.com/users/${activeUser._id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const res = await fetch(`http://127.0.0.1:6969/users/${activeUser._id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
       const data = await res.json();
       if (data.status == "success") {
         if (formData.name) {
@@ -58,16 +57,14 @@ export default function UpdateProfile({ activeUser, setActiveUser }) {
 
   async function handleDeleteAccount() {
     setDeleting(true);
+    const renderURL = `https://writewave-backend-api.onrender.com/users/${activeUser._id}`;
     try {
-      const res = await fetch(
-        `https://writewave-backend-api.onrender.com/users/${activeUser._id}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-type": "application/json",
-          },
-        }
-      );
+      const res = await fetch(`http://127.0.0.1:6969/users/${activeUser._id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
       const data = await res.json();
       if (data.status === "success") {
         setActiveUser(null);
