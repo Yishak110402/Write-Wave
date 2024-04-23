@@ -1,5 +1,7 @@
 const User = require("./../models/userModel");
 const Post = require("./../models/postModel");
+const fs = require("fs")
+const path = require("path")
 
 exports.getAllUsers = async (req, res) => {
   const users = await User.find();
@@ -65,6 +67,13 @@ exports.deleteUser = async (req, res) => {
         message: "No User found with that ID",
       });
     }
+    console.log(deletedUser);
+
+    fs.unlink(path.resolve(__dirname, `./../public/profiles/${deletedUser.profilePicture}`) , (err)=>{
+      if(err){
+        console.log(err);
+      }
+    })
     res.status(200).json({
       status: "success",
       message: "User deleted successfully",
@@ -95,5 +104,6 @@ exports.addProfilePic = async (req, res) => {
   res.status(200).json({ 
     status: "success",
     message: "Profile uploaded",
+    picture: req.file.filename
   });
 };

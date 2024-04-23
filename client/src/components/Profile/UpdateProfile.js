@@ -10,6 +10,7 @@ export default function UpdateProfile({ activeUser, setActiveUser }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [err, setErr] = useState(null);
   const [deleting, setDeleting] = useState(false);
+  const [selectedPic, setSelectedPic] = useState(null);
   const navigate = useNavigate();
   if (formData.name == "") {
     setFormData((form) => ({ ...form, name: undefined }));
@@ -78,9 +79,50 @@ export default function UpdateProfile({ activeUser, setActiveUser }) {
       }
     } catch (err) {}
   }
+  async function handleChangeProfilePic() {
+    const formData = new FormData();
+    formData.append("profile-pic", selectedPic);
+    const res = await fetch(
+      `http://127.0.0.1:6969/users/addprofilepic/${activeUser._id}`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+    const data = await res.json();
+    console.log(data);
+    setSelectedPic(null);
+    setActiveUser((user) => ({ ...user, profilePicture: data.picture }));
+    alert("Uploaded Successfully");
+    window.location.reload()
+  }
 
   return (
     <div className="update-profile">
+      <div className="profile-pic">
+        <img
+          src={`http://127.0.0.1:6969/profiles/${activeUser.profilePicture}`}
+        />
+        <div>
+          <label htmlFor="profile">Change profile picture</label>
+          <input
+            onChange={(e) => setSelectedPic(e.target.files[0])}
+            type="file"
+            id="profile"
+          />
+          {selectedPic && (
+            <>
+              <p>{selectedPic.name}</p>
+              <button
+                onClick={handleChangeProfilePic}
+                className="submit-profile"
+              >
+                Submit
+              </button>
+            </>
+          )}
+        </div>
+      </div>
       <h1>Edit user profile</h1>
       {showProgress && <div className="progress-msg">Updating...</div>}
       {showSuccessMsg && (

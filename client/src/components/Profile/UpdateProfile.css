@@ -1,3 +1,31 @@
+.profile-pic{
+    width: 100vw;
+    padding: 0 4rem;
+    display: flex;
+    align-items: center;
+}
+.profile-pic div{
+    display: flex;
+    flex-flow: column;
+    text-align: center;
+    gap: 1rem;
+}
+.profile-pic img{
+    margin: 0 10rem;
+    border-radius: 12px;
+    width: 250px;
+    height: 250px;
+}
+.profile-pic #profile{
+    display: none;
+}
+.profile-pic label{
+    border: 1px solid #5d4cff;
+    padding: 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    /* margin-top: 122rem; */
+}
 .update-profile{
     padding: 1rem 4rem;
     color: #5d4cff;
