@@ -93,7 +93,7 @@ export default function UpdateProfile({ activeUser, setActiveUser }) {
     console.log(data);
     setSelectedPic(null);
     setActiveUser((user) => ({ ...user, profilePicture: data.picture }));
-    alert("Uploaded Successfully");
+    // alert("Uploaded Successfully");
     window.location.reload()
   }
 

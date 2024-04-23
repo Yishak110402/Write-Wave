@@ -26,6 +26,25 @@
     cursor: pointer;
     /* margin-top: 122rem; */
 }
+.profile-pic p{
+    font-size: 0.9rem;
+}
+.profile-pic button{
+    width: 5rem;
+    margin: 0 auto;
+    border: 1px solid #5d4cff;
+    background-color: transparent;
+    padding: 0.5rem 0.2rem;
+    color: #5d4cff;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.profile-pic button:hover{
+    background-color: #5d4cff;
+    color: white;
+}
+
 .update-profile{
     padding: 1rem 4rem;
     color: #5d4cff;
