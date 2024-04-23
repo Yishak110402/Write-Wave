@@ -29,7 +29,7 @@ export default function SignUpForm({activeUser, setActiveUser}) {
     setLoading(true)
     const renderURL = "https://writewave-backend-api.onrender.com/users/signup"
 
-    const res = await fetch("http://127.0.0.1:6969/users/signup", {
+    const res = await fetch(renderURL, {
       method: "POST",
       headers: {
         "Content-type": "application/json",

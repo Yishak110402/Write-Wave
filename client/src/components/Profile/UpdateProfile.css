@@ -1,5 +1,4 @@
 .profile-pic{
-    width: 100vw;
     padding: 0 4rem;
     display: flex;
     align-items: center;
@@ -16,6 +15,7 @@
     width: 250px;
     height: 250px;
 }
+
 .profile-pic #profile{
     display: none;
 }
@@ -160,6 +160,12 @@
 }
 
 @media(max-width: 1000px){
+    .profile-pic{
+        gap: 2rem;
+    }
+    .profile-pic img{
+        margin: 0;
+    }
     .update-profile{
         padding: 1rem 2rem;
     }
@@ -200,11 +206,24 @@
     }
 }
 @media(max-width: 700px){
+    .profile-pic label{
+        font-size: 1rem;
+    }
     .progress-msg, .update-error-msg, .update-success-msg{
         width: 50%;
     }
 }
 @media(max-width: 500px){
+    .profile-pic{
+        flex-flow: column;
+    }
+    .profile-pic label{
+        width: 8rem;
+        font-size: 0.9rem;
+    }
+    .profile-pic img{
+        width: 80%;
+    }
     .update-profile{
         padding: 1rem 0.5rem;
     }
@@ -213,7 +232,6 @@
         margin-left: 0;
     }
     .account-btns button{
-        /* padding: 1rem; */
         width: 2rem;
         height: 1rem;
     }

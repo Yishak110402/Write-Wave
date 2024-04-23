@@ -15,7 +15,7 @@ export default function AddBlogForm({ activeUser }) {
     setAdding(true)
     e.preventDefault();
     const renderURL = "https://writewave-backend-api.onrender.com/posts"
-    const res = await fetch("http://127.0.0.1:6969/posts" , {
+    const res = await fetch(renderURL , {
       method: "POST",
       headers: {
         "Content-type": "application/json",

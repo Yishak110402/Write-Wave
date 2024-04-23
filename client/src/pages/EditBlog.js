@@ -11,7 +11,7 @@ export default function EditBlog(){
         async function getPost(){
           const renderURL = `https://writewave-backend-api.onrender.com/posts/${params.id}`
             setLoading(true)
-            const res = await fetch(`http://127.0.0.1:6969/posts/${params.id}`)
+            const res = await fetch(renderURL)
             const data = await res.json()
             console.log(data);
             setFormData((form)=>({...form, content: data.data.post.content, title: data.data.post.title}))
@@ -26,7 +26,7 @@ export default function EditBlog(){
         e.preventDefault()
         setEditting(true)
         const renderURL = `https://writewave-backend-api.onrender.com/posts/${params.id}`
-        const res = await fetch(`http://127.0.0.1:6969/posts/${params.id}`,{
+        const res = await fetch(renderURL,{
             method:"PATCH",
             headers:{
                 "Content-type":"application/json"

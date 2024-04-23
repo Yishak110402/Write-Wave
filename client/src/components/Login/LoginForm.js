@@ -26,7 +26,7 @@ export default function LoginForm({ activeUser, setActiveUser }) {
     setErr(null);
     const renderURL = "https://writewave-backend-api.onrender.com/users/login";
 
-    const res = await fetch("http://127.0.0.1:6969/users/login", {
+    const res = await fetch(renderURL, {
       method: "POST",
       headers: {
         "Content-type": "application/json",

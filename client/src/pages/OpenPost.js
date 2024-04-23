@@ -12,7 +12,7 @@ export default function OpenPost() {
     async function getPostData() {
       setLoading(true);
       const renderURL = `https://writewave-backend-api.onrender.com/posts/${params.id}`;
-      const res = await fetch(`http://127.0.0.1:6969/posts/${params.id}`);
+      const res = await fetch(renderURL);
       const data = await res.json();
       console.log(data);
       setPost(data.data.post);

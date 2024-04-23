@@ -18,7 +18,7 @@ export default function Feed({ activeUser }) {
     async function getAllPosts() {
       const renderURL = "https://writewave-backend-api.onrender.com/posts";
       setLoading(true);
-      const res = await fetch("http://127.0.0.1:6969/posts");
+      const res = await fetch(renderURL);
       const data = await res.json();
       setPosts(data.data.posts);
       setLoading(false);

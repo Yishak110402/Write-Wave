@@ -54,7 +54,7 @@ export default function Navbar({ activeUser, setActiveUser }) {
             <li>
               <img onClick={()=>{
                 navigate('/profile')
-              }} src={`http://127.0.0.1:6969/profiles/${activeUser.profilePicture}`}/>
+              }} src={`https://writewave-backend-api.onrender.com/profiles/${activeUser.profilePicture}`}/>
             </li>
           </>
         )}

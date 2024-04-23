@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { imageStorage } from "../../firebase.config";
 import "./UpdateProfile.css";
 
 export default function UpdateProfile({ activeUser, setActiveUser }) {
@@ -11,6 +12,7 @@ export default function UpdateProfile({ activeUser, setActiveUser }) {
   const [err, setErr] = useState(null);
   const [deleting, setDeleting] = useState(false);
   const [selectedPic, setSelectedPic] = useState(null);
+  const [rerender, setRerender] = useState(0);
   const navigate = useNavigate();
   if (formData.name == "") {
     setFormData((form) => ({ ...form, name: undefined }));
@@ -29,7 +31,7 @@ export default function UpdateProfile({ activeUser, setActiveUser }) {
     setShowProgress(true);
 
     try {
-      const res = await fetch(`http://127.0.0.1:6969/users/${activeUser._id}`, {
+      const res = await fetch(renderURL, {
         method: "PATCH",
         headers: {
           "Content-type": "application/json",
@@ -60,7 +62,7 @@ export default function UpdateProfile({ activeUser, setActiveUser }) {
     setDeleting(true);
     const renderURL = `https://writewave-backend-api.onrender.com/users/${activeUser._id}`;
     try {
-      const res = await fetch(`http://127.0.0.1:6969/users/${activeUser._id}`, {
+      const res = await fetch(renderURL, {
         method: "DELETE",
         headers: {
           "Content-type": "application/json",
@@ -80,28 +82,25 @@ export default function UpdateProfile({ activeUser, setActiveUser }) {
     } catch (err) {}
   }
   async function handleChangeProfilePic() {
+    const renderURL = `https://writewave-backend-api.onrender.com/users/addprofilepic/${activeUser._id}`;
     const formData = new FormData();
     formData.append("profile-pic", selectedPic);
-    const res = await fetch(
-      `http://127.0.0.1:6969/users/addprofilepic/${activeUser._id}`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
+    const res = await fetch(renderURL, {
+      method: "POST",
+      body: formData,
+    });
     const data = await res.json();
     console.log(data);
     setSelectedPic(null);
     setActiveUser((user) => ({ ...user, profilePicture: data.picture }));
-    // alert("Uploaded Successfully");
-    window.location.reload()
+    setRerender(rerender + 1);
   }
 
   return (
     <div className="update-profile">
       <div className="profile-pic">
         <img
-          src={`http://127.0.0.1:6969/profiles/${activeUser.profilePicture}`}
+          src={`https://writewave-backend-api.onrender.com/profiles/${activeUser.profilePicture}`}
         />
         <div>
           <label htmlFor="profile">Change profile picture</label>
@@ -109,6 +108,7 @@ export default function UpdateProfile({ activeUser, setActiveUser }) {
             onChange={(e) => setSelectedPic(e.target.files[0])}
             type="file"
             id="profile"
+            accept="image/*"
           />
           {selectedPic && (
             <>
