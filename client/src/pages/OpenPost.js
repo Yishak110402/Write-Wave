@@ -35,7 +35,7 @@ export default function OpenPost() {
             Posted by:- {user ? user.name : post.creatorName}
             <img 
             className="user-profile-pic"
-              src={`https://writewave-backend-api.onrender.com/profiles/${user.profilePicture}`}
+              src={`https://writewave-backend-api.onrender.com/profiles/${user.profilePicture && user.profilePicture}`}
             />
           </span>
         </>
