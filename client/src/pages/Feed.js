@@ -8,6 +8,7 @@ export default function Feed({ activeUser }) {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
+  const [allUsers, setAllUsers] = useState([])
   useEffect(function () {
     if (!activeUser) {
       navigate("/login");
@@ -21,6 +22,7 @@ export default function Feed({ activeUser }) {
       const res = await fetch(renderURL);
       const data = await res.json();
       setPosts(data.data.posts);
+      setAllUsers(data.data.users)
       setLoading(false);
     }
     getAllPosts();
@@ -35,7 +37,7 @@ export default function Feed({ activeUser }) {
         ) : posts.length === 0 ? (
           <div className="no-posts"> Oops!! Looks like the feed is empty</div>
         ) : (
-          posts.map((post) => <Post post={post} />)
+          posts.map((post) => <Post post={post} allUsers={allUsers} />)
         )}
       </div>
     </div>

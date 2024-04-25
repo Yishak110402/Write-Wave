@@ -5,6 +5,7 @@ import Loader from "../components/Loader/Loader";
 
 export default function OpenPost() {
   const [post, setPost] = useState({});
+  const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
   const params = useParams();
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ export default function OpenPost() {
       const data = await res.json();
       console.log(data);
       setPost(data.data.post);
+      setUser(data.data.user);
       setLoading(false);
     }
     getPostData();
@@ -29,7 +31,13 @@ export default function OpenPost() {
           <button onClick={() => navigate("/feed")}>Back to feed</button>
           <h1>Title: {post.title}</h1>
           <p>{post.content}</p>
-          <span>Posted by:- {post.creatorName}</span>
+          <span>
+            Posted by:- {user ? user.name : post.creatorName}
+            <img 
+            className="user-profile-pic"
+              src={`https://writewave-backend-api.onrender.com/profiles/${user.profilePicture}`}
+            />
+          </span>
         </>
       )}
     </div>

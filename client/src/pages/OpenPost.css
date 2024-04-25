@@ -31,6 +31,12 @@
     cursor: pointer;
 
 }
+.user-profile-pic{
+    width: 5%;
+    height: 5%;
+    margin-left: 2rem;
+    border-radius: 50%;
+}
 @media(max-width: 1020px){
     .open-post h1{
         font-size: 2rem;
