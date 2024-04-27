@@ -2,6 +2,7 @@
     padding: 0 4rem;
     display: flex;
     align-items: center;
+    position: relative;
 }
 .profile-pic div{
     display: flex;
@@ -14,6 +15,7 @@
     border-radius: 12px;
     width: 250px;
     height: 250px;
+    object-fit: cover;
 }
 
 .profile-pic #profile{
@@ -24,7 +26,6 @@
     padding: 1rem;
     border-radius: 12px;
     cursor: pointer;
-    /* margin-top: 122rem; */
 }
 .profile-pic p{
     font-size: 0.9rem;
@@ -44,7 +45,35 @@
     background-color: #5d4cff;
     color: white;
 }
-
+.profile-uploading{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: white;
+    opacity: 0.5;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+}
+.profile-uploading > div{
+    border: 13px solid gray;
+    border-top: 13px solid black;
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    animation: rotate 0.7s linear infinite;
+    opacity: 1;
+}
+@keyframes rotate{
+    from{
+        transform: rotate(0);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
 .update-profile{
     padding: 1rem 4rem;
     color: #5d4cff;

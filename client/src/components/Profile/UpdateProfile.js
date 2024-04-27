@@ -12,6 +12,7 @@ export default function UpdateProfile({ activeUser, setActiveUser }) {
   const [err, setErr] = useState(null);
   const [deleting, setDeleting] = useState(false);
   const [selectedPic, setSelectedPic] = useState(null);
+  const [uploadingProfile, setUploadingProfile] = useState(false);
   const [rerender, setRerender] = useState(0);
   const navigate = useNavigate();
   if (formData.name == "") {
@@ -82,6 +83,7 @@ export default function UpdateProfile({ activeUser, setActiveUser }) {
     } catch (err) {}
   }
   async function handleChangeProfilePic() {
+    setUploadingProfile(true)
     const renderURL = `https://writewave-backend-api.onrender.com/users/addprofilepic/${activeUser._id}`;
     const formData = new FormData();
     formData.append("profile-pic", selectedPic);
@@ -94,11 +96,17 @@ export default function UpdateProfile({ activeUser, setActiveUser }) {
     setSelectedPic(null);
     setActiveUser((user) => ({ ...user, profilePicture: data.picture }));
     setRerender(rerender + 1);
+    setUploadingProfile(false)
   }
 
   return (
     <div className="update-profile">
       <div className="profile-pic">
+        {uploadingProfile && (
+          <div className="profile-uploading">
+            <div></div>
+          </div>
+        )}
         <img
           src={`https://writewave-backend-api.onrender.com/profiles/${activeUser.profilePicture}`}
         />

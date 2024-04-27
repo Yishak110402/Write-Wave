@@ -18,6 +18,10 @@ export default function OpenPost() {
       console.log(data);
       setPost(data.data.post);
       setUser(data.data.user);
+      // console.log(data.data.user.profilePicture);
+      if(data.data.user === null){
+        setUser((user)=>({...user, profilePicture:"default.jpg"}))
+      }
       setLoading(false);
     }
     getPostData();
@@ -33,10 +37,10 @@ export default function OpenPost() {
           <p>{post.content}</p>
           <span>
             Posted by:- {user ? user.name : post.creatorName}
-            <img 
-            className="user-profile-pic"
-              src={`https://writewave-backend-api.onrender.com/profiles/${user.profilePicture && user.profilePicture}`}
-            />
+              <img
+                className="user-profile-pic"
+                src={`https://writewave-backend-api.onrender.com/profiles/${user.profilePicture}`}
+              />
           </span>
         </>
       )}
