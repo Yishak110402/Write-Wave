@@ -45,7 +45,7 @@ export default function App() {
             element={<Login activeUser={activeUser} setActiveUser={setActiveUser} />}
           />
           <Route path="/feed" element={<Feed activeUser={activeUser} />} />
-          <Route path="/feed/:id" element={<OpenPost />} />
+          <Route path="/feed/:id" element={<OpenPost activeUser={activeUser} />} />
           <Route
             path="/newblog"
             element={<AddBlog activeUser={activeUser} />}

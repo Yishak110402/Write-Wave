@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./OpenPost.css";
 import Loader from "../components/Loader/Loader";
+import Comments from "../components/OpenPost/Comments";
 
-export default function OpenPost() {
+export default function OpenPost({activeUser}) {
   const [post, setPost] = useState({});
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
@@ -18,7 +19,6 @@ export default function OpenPost() {
       console.log(data);
       setPost(data.data.post);
       setUser(data.data.user);
-      // console.log(data.data.user.profilePicture);
       if(data.data.user === null){
         setUser((user)=>({...user, profilePicture:"default.jpg"}))
       }
@@ -27,6 +27,7 @@ export default function OpenPost() {
     getPostData();
   }, []);
   return (
+    <>
     <div className="open-post">
       {loading ? (
         <Loader />
@@ -45,5 +46,7 @@ export default function OpenPost() {
         </>
       )}
     </div>
+      <Comments post={post} user={user} activeUser={activeUser}/>
+      </>
   );
 }
