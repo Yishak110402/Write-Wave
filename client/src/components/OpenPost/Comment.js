@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function Comment({ comment, activeUser }) {
+export default function Comment({ comment, activeUser, post, setRerender }) {
   const [user, setUser] = useState();
   const [showOptions, setShowOptions] = useState(false);
   useEffect(function () {
@@ -22,25 +22,38 @@ export default function Comment({ comment, activeUser }) {
     }
     getUser();
   }, []);
+  async function deleteComment() {
+    const res = await fetch(
+      `https://writewave-backend-api.onrender.com/posts/${post._id}/${comment._id}`,
+      {
+        method: "DELETE",
+      }
+    );
+    const data = await res.json();
+    console.log(data);
+    setShowOptions(false)
+    setRerender((r)=>(!r))
+  }
   return (
     <div className="comment">
       {user && (
         <>
-          <div>
+          <div className="user-detail">
             <img
               src={`https://writewave-backend-api.onrender.com/profiles/${user.profilePicture}`}
             />
             <h2>{user.name}</h2>
           </div>
           <div className="comment-content">
-            <h2>{comment.commentContent}</h2>
+            <p>{comment.commentContent}</p>
             {activeUser._id === comment.commentor && (
               <div className="options-container">
-                <span onClick={()=>(setShowOptions((options)=>(!options)))}>...</span>
+                <span onClick={() => setShowOptions((options) => !options)}>
+                  ...
+                </span>
                 {showOptions && (
                   <ul>
-                    <li>Delete</li>
-                    <li>Edit</li>
+                    <li onClick={deleteComment}>Delete</li>
                   </ul>
                 )}
               </div>

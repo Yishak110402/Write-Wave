@@ -2,8 +2,10 @@ import { useState } from "react";
 
 export default function NewComment({ setRerender, activeUser,post }) {
   const [comment, setComment] = useState({});
+  const [adding, setAdding] = useState(false)
     async function addComment(){
-        const res = await fetch(`https://writewave-backend-api.onrender.com/comment/${post._id}`,{
+        setAdding(true)
+        const res = await fetch(`https://writewave-backend-api.onrender.com/posts/comment/${post._id}`,{
             method:"POST",
             headers:{
                 "Content-type":"application/json"
@@ -12,21 +14,26 @@ export default function NewComment({ setRerender, activeUser,post }) {
         })
         const data = await res.json()
         console.log(data);
+        setRerender((r)=>(!r))
+        setComment((comment)=>({...comment, commentContent:""}))
+        setAdding(false)
     }
 
   return (
-    <div>
-      <input
+    <div className="new-comment"> 
+      <textarea
         onChange={(e) =>
           setComment((comment) => ({
             ...comment,
             commentContent: e.target.value,
             commentor: activeUser._id
           }))
+          
         }
-        type="text"
+        value={comment.commentContent}
+        disabled={adding}
       />
-      <button onClick={addComment}>Add Comment</button>
+      <button onClick={addComment} disabled={adding} >Add Comment</button>
     </div>
   );
 }

@@ -8,6 +8,7 @@ export default function OpenPost({activeUser}) {
   const [post, setPost] = useState({});
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
+  const [rerender, setRerender] = useState(false)
   const params = useParams();
   const navigate = useNavigate();
   useEffect(function () {
@@ -25,7 +26,7 @@ export default function OpenPost({activeUser}) {
       setLoading(false);
     }
     getPostData();
-  }, []);
+  }, [rerender]);
   return (
     <>
     <div className="open-post">
@@ -46,7 +47,7 @@ export default function OpenPost({activeUser}) {
         </>
       )}
     </div>
-      <Comments post={post} user={user} activeUser={activeUser}/>
+      <Comments setRerender={setRerender} post={post} user={user} activeUser={activeUser}/>
       </>
   );
 }
