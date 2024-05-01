@@ -51,6 +51,7 @@ export default function App() {
                 activeUser={activeUser}
                 signupFormData={signupFormData}
                 setSignupFormData={setSignupFormData}
+                setActiveUser={setActiveUser}
               />
             }
           />

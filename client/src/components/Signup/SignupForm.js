@@ -24,42 +24,6 @@ export default function SignUpForm({
     [activeUser]
   );
 
-  // async function handleFormSubmit(e) {
-  //   e.preventDefault();
-  //   setShowErrorMsg(false);
-  //   setErr(null)
-  //   setLoading(true)
-  //   const renderURL = "https://writewave-backend-api.onrender.com/users/signup"
-
-  //   const res = await fetch(renderURL, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-type": "application/json",
-  //     },
-  //     body: JSON.stringify(signupFormData),
-  //   });
-  //   if(!res.ok){
-  //     setShowErrorMsg(true)
-  //     setLoading(false)
-  //     return
-  //   }
-  //   const data = await res.json();
-  //   console.log(data);
-  //   if (data.status === "fail") {
-  //     setShowErrorMsg(true);
-  //     setErr(data.message)
-  //     setLoading(false)
-  //     return;
-  //   }
-  //   if (data.status === "success") {
-  //     setShowSuccessMsg(true);
-  //     setLoading(false)
-  //   }
-  //   setLoading(false)
-  //   setActiveUser(data.data.user)
-  //   navigate('/feed')
-  // }
-
   async function handleEmailVerification(e) {
     e.preventDefault();
     setLoading(true)
