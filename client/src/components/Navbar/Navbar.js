@@ -51,11 +51,7 @@ export default function Navbar({ activeUser, setActiveUser }) {
             <li>
               <button onClick={handleSignout}>Sign Out</button>
             </li>
-            <li>
-              <img onClick={()=>{
-                navigate('/profile')
-              }} src={`https://writewave-backend-api.onrender.com/profiles/${activeUser.profilePicture}`}/>
-            </li>
+         
           </>
         )}
       </ul>

@@ -65,7 +65,7 @@ export default function LoginForm({ activeUser, setActiveUser }) {
           onChange={(e) => {
             setFormData((form) => ({ ...form, email: e.target.value }));
           }}
-          type="text"
+          type="email"
           required
           placeholder="Email"
         />

@@ -33,6 +33,8 @@ export default function App() {
     function () {
       if (activeUser != null) {
         localStorage.setItem("activeUser", JSON.stringify(activeUser));
+      }else{
+        localStorage.removeItem("activeUser")
       }
     },
     [activeUser, setActiveUser]

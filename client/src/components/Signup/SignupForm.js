@@ -27,6 +27,12 @@ export default function SignUpForm({
   async function handleEmailVerification(e) {
     e.preventDefault();
     setLoading(true)
+    if(signupFormData.password.length<8){
+      setLoading(false)
+      setErr("Password length must be more than 8 characters")
+      setShowErrorMsg(true)
+      return
+    }
     const res = await fetch(
       "https://writewave-backend-api.onrender.com/users/verify",
       {
@@ -76,7 +82,7 @@ export default function SignUpForm({
           onChange={(e) => {
             setSignupFormData((form) => ({ ...form, email: e.target.value }));
           }}
-          type="text"
+          type="email"
           required
           placeholder="Email"
         />

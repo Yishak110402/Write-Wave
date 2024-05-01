@@ -46,7 +46,7 @@ export default function Comment({ comment, activeUser, post, setRerender }) {
           </div>
           <div className="comment-content">
             <p>{comment.commentContent}</p>
-            {activeUser._id === comment.commentor && (
+            {activeUser._id === comment.commentor || post.createdBy === activeUser._id && (
               <div className="options-container">
                 <span onClick={() => setShowOptions((options) => !options)}>
                   ...

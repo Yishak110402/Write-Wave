@@ -9,22 +9,26 @@ export default function VerifyEmail({ signupFormData, setActiveUser }) {
   const [showErrorMsg, setShowErrorMsg] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  //   useEffect(function () {
-  //     if (
-  //       !signupFormData ||
-  //       signupFormData.name.length === 0 ||
-  //       signupFormData.email === ""
-  //     ) {
-  //       navigate("/signup");
-  //       return;
-  //     }
-  //   }, []);
+    useEffect(function () {
+      if (
+        !signupFormData ||
+        signupFormData.name.length === 0 ||
+        signupFormData.email === ""
+      ) {
+        navigate("/signup");
+        return;
+      }
+    }, []);
 
   async function handleFormSubmit(e) {
     e.preventDefault();
-    if (verification !== signupFormData.verificationCode) {
+    setShowErrorMsg(false)
+    setErr(null)
+    setLoading(true);
+    if (Number(verification) !== Number(signupFormData.verificationCode)) {
       setErr("Incorrect verification code");
       setShowErrorMsg(true);
+      setLoading(false)
       return;
     }
     setShowErrorMsg(false);
@@ -52,12 +56,9 @@ export default function VerifyEmail({ signupFormData, setActiveUser }) {
       setLoading(false);
       return;
     }
-    if (data.status === "success") {
-      //   setShowSuccessMsg(true);
-      setLoading(false);
-    }
+
     setLoading(false);
-    // setActiveUser(data.data.user)
+    setActiveUser(data.data.user);
     navigate("/feed");
   }
 
@@ -65,16 +66,19 @@ export default function VerifyEmail({ signupFormData, setActiveUser }) {
     <div className="verify-email">
       <img src={emailImg} />
       <div className="verify-form">
-        <h1>Hello, Yishak hailu</h1>
+        <h1>Hello, {signupFormData.name}</h1>
         <h2>
-          Please check your email <span>yishakhailu@gmail.com</span> for the
+          Please check your email <span>{signupFormData.email}</span> for the
           verification code we sent to you
         </h2>
         <div>
-          <input type="number" max="999999" />
-          <button onChange={(e) => setVerification(e.target.value)}>
-            Verify
-          </button>
+          <input
+            type="number"
+            max="999999"
+            onChange={(e) => setVerification(e.target.value)}
+          />
+          <button disabled={loading} onClick={(e) => handleFormSubmit(e)}>{loading ? "Verifying..." : "Verify"}</button>
+          {showErrorMsg && <div className="error-msg">{err}</div>}
         </div>
       </div>
     </div>
