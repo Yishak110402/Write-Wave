@@ -1,0 +1,96 @@
+.verify-email{
+    padding: 2rem 4rem;
+    padding-top: 4rem;
+    /* width: 100vw; */
+    height: 85vh;
+    color: #5d4cff;
+    display: flex;
+    align-items: center;
+}
+.verify-email *{
+    flex-basis: 50%;
+}
+.verify-email img{
+    width: 35%;
+}
+.verify-form{
+    text-align: center;
+}
+.verify-form h1{
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+}
+.verify-form h2{
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+}
+.verify-form div{
+    display: flex;
+    flex-flow: column;
+}
+.verify-email div input{
+    width: 15rem;
+    margin: 1rem auto;
+    padding: 0.5rem 1rem;
+    border: 2px solid #5d4cff;
+    font-size: 1.7rem;
+    color: #5d4cff;
+    font-family: monospace;
+    border-radius: 15px;
+    letter-spacing: 0.5rem;
+}
+.verify-email div input:focus{
+    border: 2px solid #5d4cff;
+}
+.verify-email div button{
+    /* width: 4rem; */
+    margin: 0 auto;
+    padding: 0.5rem 1rem;
+    background-color: #5d4cff;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.05rem;
+}
+.verify-email div button:active{
+    transform: scale(0.9);
+}
+@media(max-width:1000px){
+    .verify-email img{
+        width: 45%;
+    }
+}
+@media(max-width:800px){
+    .verify-email{
+        position: relative;
+        display: inline-block;
+        height: 100vh;
+        padding: 0;
+    }
+    .verify-email img{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1000;
+        padding: 1rem;
+    }
+    .verify-form{
+        flex-basis: 100%;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(8px);
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+    }
+    .verify-form h1{
+        margin: 0;
+    }
+    .verify-form > *{
+        margin: 0;
+    }
+}
