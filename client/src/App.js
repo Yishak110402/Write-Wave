@@ -13,6 +13,7 @@ import Homepage from "./pages/Homepage";
 import PageNotFound from "./pages/PageNotFound";
 import VerifyEmail from "./pages/VerifyEmail";
 import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 export default function App() {
   const [activeUser, setActiveUser] = useState(null);
@@ -34,8 +35,8 @@ export default function App() {
     function () {
       if (activeUser != null) {
         localStorage.setItem("activeUser", JSON.stringify(activeUser));
-      }else{
-        localStorage.removeItem("activeUser")
+      } else {
+        localStorage.removeItem("activeUser");
       }
     },
     [activeUser, setActiveUser]
@@ -58,7 +59,8 @@ export default function App() {
               />
             }
           />
-          <Route path="/forgotpassword" element={<ForgotPassword/>} />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route path="/resetpassword" element={<ResetPassword />} />
           <Route
             path="/signup"
             element={
