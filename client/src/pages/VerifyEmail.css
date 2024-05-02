@@ -35,10 +35,9 @@
     background-color: #5d4cff;
     border: none;
     width: 5rem;
-    padding: 0.3rem 1rem;
+    padding: 0.3rem 1.5rem;
     font-size: 1.03rem;
     border-radius: 20px;
-    letter-spacing: 0.1rem;
 }
 .verify-form div button:disabled{
     opacity: 0.8;

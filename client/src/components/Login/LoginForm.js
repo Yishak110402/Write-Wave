@@ -83,6 +83,7 @@ export default function LoginForm({ activeUser, setActiveUser }) {
         <p>
           Don't have an account <Link to="/signup">sign up</Link>{" "}
         </p>
+        <Link className="forgot-link" to='/forgotpassword'>Forgot my password</Link>
       </form>
     </div>
   );

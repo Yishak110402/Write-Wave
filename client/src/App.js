@@ -12,6 +12,7 @@ import EditBlog from "./pages/EditBlog";
 import Homepage from "./pages/Homepage";
 import PageNotFound from "./pages/PageNotFound";
 import VerifyEmail from "./pages/VerifyEmail";
+import ForgotPassword from "./pages/ForgotPassword";
 
 export default function App() {
   const [activeUser, setActiveUser] = useState(null);
@@ -57,6 +58,7 @@ export default function App() {
               />
             }
           />
+          <Route path="/forgotpassword" element={<ForgotPassword/>} />
           <Route
             path="/signup"
             element={

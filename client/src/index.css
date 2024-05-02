@@ -1,11 +1,13 @@
-body{
-    width: 100vw;
-    height: 100vh;
-    font-family: "Helvetica", sans-serif;
-    overflow-x:  hidden;
-    position: relative;
+@import url("https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&display=swap");
+
+body {
+  width: 100vw;
+  height: 100vh;
+  font-family: "Bitter", serif;
+  overflow-x: hidden;
+  position: relative;
 }
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
