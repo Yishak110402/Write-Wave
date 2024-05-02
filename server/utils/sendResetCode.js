@@ -1,14 +1,14 @@
 const nodemailer = require("nodemailer");
 
 exports.sendEmail = async (options) => {
-  const tempTransport = nodemailer.createTransport({
-    host: "sandbox.smtp.mailtrap.io",
-    port: 2525,
-    auth: {
-      user: "91863d8e158554",
-      pass: "6088132c49a524",
-    },
-  });
+    const tempTransport = nodemailer.createTransport({
+        host: "sandbox.smtp.mailtrap.io",
+        port: 2525,
+        auth: {
+          user: "9a18ce9582707b",
+          pass: "47e9006524ec36"
+        }
+      });
 
   const mailOptions = {
     from: "WriteWave <writewave.et@gmail.com>",
@@ -88,7 +88,7 @@ exports.sendEmail = async (options) => {
         </header>
         <main>
             <h2>Hello, ${options.name}</h2>
-            <p class="code">${options.verificationCode} is your password reset verification code </p>
+            <p class="code">${options.verificationCode} is your password reset code </p>
             <p class="notice">If you didnt ask for a code please ignore this email</p>
         </main>
     </body>

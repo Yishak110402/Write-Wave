@@ -8,19 +8,19 @@ exports.sendVerificationEmail = async (options) => {
     host: "sandbox.smtp.mailtrap.io",
     port: 2525,
     auth: {
-      user: "91863d8e158554",
-      pass: "6088132c49a524",
+      user: "9a18ce9582707b",
+      pass: "47e9006524ec36",
     },
   });
 
   const gmailTransport = nodemailer.createTransport({
-    service:"gmail",
-    host:"smtp.gmail.com",
-    auth:{
-        user:"writewave.et@gmail.com",
-        pass:gmailAppPassword
-    }
-  })
+    service: "gmail",
+    host: "smtp.gmail.com",
+    auth: {
+      user: "writewave.et@gmail.com",
+      pass: gmailAppPassword,
+    },
+  });
 
   const mailOptions = {
     from: "WriteWave <writewave.et@gmail.com>",
