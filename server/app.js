@@ -27,11 +27,12 @@ mongoose.connect(mongoURL,{
 })
 
 
-app.get('/test',(req, res)=>{
-    console.log("Test Successful");
-    res.status(200).json({
-        message:"Successful"
+app.all('*',(req, res)=>{
+    res.json({
+        status:"fail",
+        message:`couldn't find ${req.originalUrl}`
     })
+
 })
 
 app.listen(6969,()=>{

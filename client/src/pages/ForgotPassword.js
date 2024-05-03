@@ -31,12 +31,16 @@ export default function ForgotPassword({ verifiedEmail, setVerifiedEmail }) {
       setVerificationCode(data.code);
       setShowCodeInput(true);
       setSending(false);
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+      });
     } catch (error) {
       setErr(error);
     }
   }
 
-  async function verifyCode() {
+   function verifyCode() {
     setShowErr(false);
     if (verificationCode !== Number(enteredCode)) {
       setErr("Incorrect code");
@@ -59,6 +63,7 @@ export default function ForgotPassword({ verifiedEmail, setVerifiedEmail }) {
             onChange={(e) => setVerifiedEmail(e.target.value)}
             disabled={showCodeInput}
             required
+            // value={"yishak.110402@gmail.com"}
           />
           <button
             disabled={sending || showCodeInput}
@@ -75,10 +80,10 @@ export default function ForgotPassword({ verifiedEmail, setVerifiedEmail }) {
             <button onClick={() => setShowCodeInput(false)}>
               Change email
             </button>
-            <h1>
+            <p>
               Enter the verification code you received through your email{" "}
               {verifiedEmail}
-            </h1>
+            </p>
             <input
               type="number"
               placeholder="Verification code"

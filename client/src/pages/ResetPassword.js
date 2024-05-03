@@ -60,7 +60,7 @@ export default function ResetPassword({ verifiedEmail }) {
     <div className="reset-password">
       <img src={resetPasswordImg} />
       <div className="reset-form">
-        <h1>Reset Password for yishak.110402@gmail.com {verifiedEmail}</h1>
+        <h1>Reset Password for {verifiedEmail}</h1>
         <form onSubmit={(e) => resetPassword(e)}>
           <div>
             <p>Enter new password</p>
