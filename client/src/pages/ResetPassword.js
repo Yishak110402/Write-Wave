@@ -8,19 +8,18 @@ export default function ResetPassword({ verifiedEmail }) {
   const [updated, setUpdated] = useState(false);
   const [err, setErr] = useState(null);
   const [showErr, setShowErr] = useState(false);
-  const [success, setSuccess] = useState(null);
-  const [showSuccess, setShowSuccess] = useState(false);
   const [passwords, setPasswords] = useState({
     newPassword: "",
     confirmPassword: "",
   });
-  // useEffect(function () {
-  //   if (!verifiedEmail) {
-  //     navigate("/login");
-  //   }
-  // }, []);
+  const navigate = useNavigate();
 
-  // const navigate = useNavigate();
+  useEffect(function () {
+    if (!verifiedEmail) {
+      navigate("/login");
+    }
+  }, []);
+
   async function resetPassword(e) {
     e.preventDefault();
     setUpdating(true);
@@ -51,6 +50,8 @@ export default function ResetPassword({ verifiedEmail }) {
         setUpdating(false);
         return;
       }
+      setUpdated(true);
+      setUpdating(false);
     } catch (err) {
       console.log(err);
     }
@@ -59,7 +60,7 @@ export default function ResetPassword({ verifiedEmail }) {
     <div className="reset-password">
       <img src={resetPasswordImg} />
       <div className="reset-form">
-        <h1>Reset Password for yishak.110402@gmail.com{verifiedEmail}</h1>
+        <h1>Reset Password for yishak.110402@gmail.com {verifiedEmail}</h1>
         <form onSubmit={(e) => resetPassword(e)}>
           <div>
             <p>Enter new password</p>
@@ -79,13 +80,16 @@ export default function ResetPassword({ verifiedEmail }) {
               }
             />
           </div>
-          <button>Update password</button>
+          <button disabled={updating || updated}>
+            {updating ? "Updating.." : "Update password"}
+          </button>
         </form>
         {showErr && <div className="error-msg">{err}</div>}
-        <div className="success-msg">
-          Password updated successfully.
-          <p><Link to='/login'>Login</Link> to your account</p>
-        </div>
+        {updated && (
+          <div className="success-msg">
+            Password updated successfully. {" "}<Link to="/login">Login</Link> to your account
+          </div>
+        )}
       </div>
     </div>
   );
