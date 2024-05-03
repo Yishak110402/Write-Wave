@@ -22,6 +22,7 @@ export default function App() {
     email: "",
     password: "",
   });
+  const [verifiedEmail, setVerifiedEmail] = useState(null);
 
   useEffect(function () {
     const storedValue = localStorage.getItem("activeUser");
@@ -59,8 +60,16 @@ export default function App() {
               />
             }
           />
-          <Route path="/forgotpassword" element={<ForgotPassword />} />
-          <Route path="/resetpassword" element={<ResetPassword />} />
+          <Route
+            path="/forgotpassword"
+            element={
+              <ForgotPassword
+                verifiedEmail={verifiedEmail}
+                setVerifiedEmail={setVerifiedEmail}
+              />
+            }
+          />
+          <Route path="/resetpassword" element={<ResetPassword verifiedEmail={verifiedEmail} />} />
           <Route
             path="/signup"
             element={

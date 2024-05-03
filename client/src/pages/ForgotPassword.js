@@ -1,38 +1,49 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./ForgotPassword.css";
 
-export default function ForgotPassword() {
-  const [email, setEmail] = useState(null);
-  const [sending, setSending] = useState(false)
+export default function ForgotPassword({ verifiedEmail, setVerifiedEmail }) {
+  const [sending, setSending] = useState(false);
   const [verificationCode, setVerificationCode] = useState(null);
+  const [enteredCode, setEnteredCode] = useState(null);
   const [showCodeInput, setShowCodeInput] = useState(false);
-  const [err, setErr] = useState(null)
-  const [showErr, setShowErr] = useState(false)
+  const [err, setErr] = useState(null);
+  const [showErr, setShowErr] = useState(false);
+  const [verifying, setVerifying] = useState(false);
+  const navigate = useNavigate();
 
   async function sendVerificationCode() {
-    setSending(true)
-    setShowErr(false)
-    setErr(null)
+    setSending(true);
+    setShowErr(false);
+    setErr(null);
     try {
       const res = await fetch(
-        `https://writewave-backend-api.onrender.com/users/resetcode/${email}`
+        `https://writewave-backend-api.onrender.com/users/resetcode/${verifiedEmail}`
       );
-      const data = await res.json()
+      const data = await res.json();
       console.log(data);
-      if(data.status === "fail"){
-        setErr(data.message)
-        setShowErr(true)
-        return
+      if (data.status === "fail") {
+        setSending(false);
+        setErr(data.message);
+        setShowErr(true);
+        return;
       }
-      setVerificationCode(data.code)
+      setVerificationCode(data.code);
       setShowCodeInput(true);
+      setSending(false);
     } catch (error) {
-      setErr(error)
-
+      setErr(error);
     }
   }
 
-  async function verifyCode(){
+  async function verifyCode() {
+    setShowErr(false);
+    if (verificationCode !== Number(enteredCode)) {
+      setErr("Incorrect code");
+      setShowErr(true);
+      return;
+    }
+    navigate("/resetpassword");
 
   }
 
@@ -45,13 +56,18 @@ export default function ForgotPassword() {
           <input
             type="email"
             placeholder="Enter your email"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setVerifiedEmail(e.target.value)}
             disabled={showCodeInput}
             required
           />
-          <button onClick={sendVerificationCode}>Send verification code</button>
+          <button
+            disabled={sending || showCodeInput}
+            onClick={sendVerificationCode}
+          >
+            {sending ? "Sending" : "Send verification code"}
+          </button>
         </div>
-       {showErr &&  <div className="error-msg">{err}</div>}
+        {showErr && <div className="error-msg">{err}</div>}
       </div>
       <div className="code-input">
         {showCodeInput && (
@@ -60,14 +76,17 @@ export default function ForgotPassword() {
               Change email
             </button>
             <h1>
-              Enter the verification code you received through you email {email}
+              Enter the verification code you received through your email{" "}
+              {verifiedEmail}
             </h1>
             <input
               type="number"
               placeholder="Verification code"
-              onChange={(e) => setVerificationCode(e.target.value)}
+              onChange={(e) => setEnteredCode(e.target.value)}
             />
-            <button>Verify code</button>
+            <button disabled={sending} onClick={verifyCode}>
+              Verify code
+            </button>
           </>
         )}
       </div>
