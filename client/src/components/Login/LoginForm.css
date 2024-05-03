@@ -42,6 +42,10 @@
     color: #5d4cff;
     text-underline-offset: 0.2rem;
 }
+.login form > a{
+    color: #5d4cff;
+    text-underline-offset: 0.2rem;
+}
 .error-msg{
     background-color: #ff9274;
     padding: 0.7rem;

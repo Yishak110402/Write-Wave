@@ -6,7 +6,7 @@ export default function ForgotPassword({ verifiedEmail, setVerifiedEmail }) {
   const [sending, setSending] = useState(false);
   const [verificationCode, setVerificationCode] = useState(null);
   const [enteredCode, setEnteredCode] = useState(null);
-  const [showCodeInput, setShowCodeInput] = useState(true);
+  const [showCodeInput, setShowCodeInput] = useState(false);
   const [err, setErr] = useState(null);
   const [showErr, setShowErr] = useState(false);
   const [verifying, setVerifying] = useState(false);
