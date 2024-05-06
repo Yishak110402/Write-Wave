@@ -1,6 +1,5 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { imageStorage } from "../../firebase.config";
 import "./UpdateProfile.css";
 
 export default function UpdateProfile({ activeUser, setActiveUser }) {
@@ -8,6 +7,8 @@ export default function UpdateProfile({ activeUser, setActiveUser }) {
   const [showSuccessMsg, setShowSuccessMsg] = useState(false);
   const [showErrorMsg, setShowErrorMsg] = useState(false);
   const [showProgress, setShowProgress] = useState(false);
+  const [showVerification, setShowVerification] = useState(false);
+  const [code, setCode] = useState(null)
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [err, setErr] = useState(null);
   const [deleting, setDeleting] = useState(false);
@@ -21,43 +22,116 @@ export default function UpdateProfile({ activeUser, setActiveUser }) {
   if (formData.email == "") {
     setFormData((form) => ({ ...form, email: undefined }));
   }
-  async function handleUpdateForm(e) {
-    e.preventDefault();
-    setShowSuccessMsg(false);
-    setShowErrorMsg(false);
-    const renderURL = `https://writewave-backend-api.onrender.com/users/${activeUser._id}`;
-    if (formData == {}) {
-      return;
-    }
-    setShowProgress(true);
+  // async function handleUpdateForm(e) {
+  //   e.preventDefault();
+  //   setShowSuccessMsg(false);
+  //   setShowErrorMsg(false);
+  //   const renderURL = `https://writewave-backend-api.onrender.com/users/${activeUser._id}`;
+  //   if (formData == {}) {
+  //     return;
+  //   }
+  //   setShowProgress(true);
 
+  //   try {
+  //     const res = await fetch(renderURL, {
+  //       method: "PATCH",
+  //       headers: {
+  //         "Content-type": "application/json",
+  //       },
+  //       body: JSON.stringify(formData),
+  //     });
+  //     const data = await res.json();
+  //     if (data.status == "success") {
+  //       if (formData.name) {
+  //         setActiveUser((user) => ({ ...user, name: formData.name }));
+  //       }
+  //       if (formData.email) {
+  //         setActiveUser((user) => ({ ...user, email: formData.email }));
+  //       }
+  //       setShowSuccessMsg(true);
+  //       setShowProgress(false);
+  //     }
+  //     if (data.status == "fail") {
+  //       setShowErrorMsg(true);
+  //       setErr(data.message);
+  //       setShowProgress(false);
+  //     }
+  //     setFormData({});
+  //   } catch (err) {}
+  // }
+
+  async function changeName() {
     try {
-      const res = await fetch(renderURL, {
-        method: "PATCH",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      setShowErrorMsg(false);
+      setShowSuccessMsg(false);
+      setShowProgress(true);
+      const res = await fetch(
+        `https://writewave-backend-api.onrender.com/users/${activeUser._id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+          }),
+        }
+      );
       const data = await res.json();
-      if (data.status == "success") {
-        if (formData.name) {
-          setActiveUser((user) => ({ ...user, name: formData.name }));
-        }
-        if (formData.email) {
-          setActiveUser((user) => ({ ...user, email: formData.email }));
-        }
+      console.log(data);
+      if (data.status === "success") {
         setShowSuccessMsg(true);
-        setShowProgress(false);
-      }
-      if (data.status == "fail") {
-        setShowErrorMsg(true);
+        setActiveUser((user)=>({...user, name:formData.name}))
+      } else {
         setErr(data.message);
-        setShowProgress(false);
+        setShowErrorMsg(true);
       }
-      setFormData({});
-    } catch (err) {}
+      setShowProgress(false);
+    } catch (err) {
+      setErr(err.message);
+      setShowErrorMsg(true);
+    }
   }
+  async function changePassword() {
+    setShowErrorMsg(false)
+    setShowSuccessMsg(false)
+    setShowProgress(true)
+    try {
+      setShowErrorMsg(false);
+      setShowSuccessMsg(false);
+      setShowProgress(true);
+      const res = await fetch(
+        `https://writewave-backend-api.onrender.com/users/${activeUser._id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            oldPassword: formData.oldPassword,
+            newPassword: formData.newPassword
+          }),
+        }
+      );
+      const data = await res.json();
+      console.log(data);
+      if (data.status === "success") {
+        setShowSuccessMsg(true);
+        setShowProgress(false)
+        setActiveUser((user)=>({...user, password:formData.newPassword}))
+      } else {
+        setShowProgress(false)
+        setErr(data.message);
+        setShowErrorMsg(true);
+      }
+      setShowProgress(false);
+    } catch (err) {
+      setErr(err.message);
+      setShowErrorMsg(true);
+      setShowProgress(false)
+    }
+  }
+
 
   async function handleDeleteAccount() {
     setDeleting(true);
@@ -83,7 +157,7 @@ export default function UpdateProfile({ activeUser, setActiveUser }) {
     } catch (err) {}
   }
   async function handleChangeProfilePic() {
-    setUploadingProfile(true)
+    setUploadingProfile(true);
     const renderURL = `https://writewave-backend-api.onrender.com/users/addprofilepic/${activeUser._id}`;
     const formData = new FormData();
     formData.append("profile-pic", selectedPic);
@@ -96,7 +170,38 @@ export default function UpdateProfile({ activeUser, setActiveUser }) {
     setSelectedPic(null);
     setActiveUser((user) => ({ ...user, profilePicture: data.picture }));
     setRerender(rerender + 1);
-    setUploadingProfile(false)
+    setUploadingProfile(false);
+  }
+
+  async function sendVerification(){
+    setShowErrorMsg(false)
+    setShowSuccessMsg(false)
+    try {
+      const res = await fetch("https://writewave-backend-api.onrender.com/users/verify",{
+        method:"POST",
+        headers:{
+          "Content-type":"application/json"
+        },
+        body: JSON.stringify({
+          name:activeUser.name,
+          email: formData.email
+        })
+      })
+      const data = await res.json()
+      console.log(data);
+      if(data.status === "Success"){
+        setCode(data.code)
+        setShowVerification(true)
+      }
+      if(data.status === "fail"){
+        setErr(data.message)
+        setShowErrorMsg(true)
+      }      
+    } catch (err) {
+      setErr(err.message)
+      setShowErrorMsg(true)
+      
+    }
   }
 
   return (
@@ -140,8 +245,8 @@ export default function UpdateProfile({ activeUser, setActiveUser }) {
         <div className="update-error-msg">{err ? err : "Unable to update"}</div>
       )}
 
-      <form onSubmit={(e) => handleUpdateForm(e)}>
-        <div>
+      <div className="form">
+        <div className="name-input">
           <label>Name</label>
           <input
             onChange={(e) =>
@@ -151,8 +256,9 @@ export default function UpdateProfile({ activeUser, setActiveUser }) {
             placeholder={activeUser.name}
             value={formData.name}
           />
+          <button onClick={changeName}>Change Name</button>
         </div>
-        <div>
+        <div className="email-input">
           <label>Email</label>
           <input
             type="text"
@@ -162,8 +268,16 @@ export default function UpdateProfile({ activeUser, setActiveUser }) {
             placeholder={activeUser.email}
             value={formData.email}
           />
+          <button onClick={sendVerification}>Verifiy New Email</button>
         </div>
-        <div>
+        {showVerification && (
+          <div className="verify-email-input">
+            <label>Verification Code</label>
+            <input type="number" placeholder="123456" />
+            <button type="button">Change Email</button>
+          </div>
+        )}
+        <div className="password-input old">
           <label>Old password</label>
           <input
             type="text"
@@ -174,7 +288,7 @@ export default function UpdateProfile({ activeUser, setActiveUser }) {
             }
           />
         </div>
-        <div>
+        <div className="password-input new">
           <label>New password</label>
           <input
             type="text"
@@ -184,6 +298,7 @@ export default function UpdateProfile({ activeUser, setActiveUser }) {
               setFormData((form) => ({ ...form, newPassword: e.target.value }))
             }
           />
+          <button onClick={changePassword}>Change Password</button>
         </div>
         <div className="account-btns">
           <button type="submit">Update profile</button>
@@ -195,7 +310,7 @@ export default function UpdateProfile({ activeUser, setActiveUser }) {
             Delete Account
           </button>
         </div>
-      </form>
+      </div>
       {showDeleteModal && (
         <div className="delete-confirm-modal">
           <div>

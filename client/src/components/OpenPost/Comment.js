@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 export default function Comment({ comment, activeUser, post, setRerender }) {
   const [user, setUser] = useState();
   const [showOptions, setShowOptions] = useState(false);
+  const [canDelete, setCanDelete] = useState(activeUser._id == post.createdBy || comment.commentor == activeUser._id )
   useEffect(function () {
     async function getUser() {
       const res = await fetch(

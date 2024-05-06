@@ -78,11 +78,20 @@
     padding: 1rem 4rem;
     color: #5d4cff;
 }
-.update-profile form div{
+.update-profile .form div{
     display: flex;
     justify-content: space-between;
-    width: 45%;
+    width: 65%;
     margin: 2rem;
+}
+.update-profile .form .password-input.old{
+    width: 41%;
+}
+.update-profile .form .password-input.new input{
+    margin-left: -5rem;
+}
+.update-profile .form .verify-email-input input{
+    margin-left: -6rem;
 }
 .update-profile input{
     width: 13rem;
@@ -91,7 +100,7 @@
     border: 1px solid #5d4cff;
     border-radius: 12px;
 }
-.update-profile form button{
+.update-profile .form button{
     background-color: #5d4cff;
     color: white;
     border: none;
@@ -204,10 +213,10 @@
     }
 }
 @media(max-width:850px){
-    .update-profile form{
+    .update-profile .form{
         margin-right: 2rem;
     }
-    .update-profile form > div{
+    .update-profile .form > div{
         margin-right: 1.5rem;
         width: 100%;
     }
